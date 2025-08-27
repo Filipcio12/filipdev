@@ -22,7 +22,7 @@ app.use((err, req, res, next) => {
 });
 
 if (require.main === module) {
-  app.listen(port, "0.0.0.0", () => {
+  app.listen(port, "127.0.0.1", () => {
     console.log(
       `Express started in ${app.get("env")} mode ` +
         `on http://localhost:${port}` +

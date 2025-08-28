@@ -1,5 +1,31 @@
 @import "tailwindcss";
 
+@theme {
+  --color-bg_dim: #1E2326;
+  --color-bg0: #272E33;
+  --color-bg1: #2E383C;
+  --color-bg2: #374145;
+  --color-bg3: #414B50;
+  --color-bg4: #495156;
+  --color-bg5: #4F5B58;
+  --color-bg_red: #493B40;
+  --color-bg_yellow: #45443C;
+  --color-bg_green: #3C4841;
+  --color-bg_blue: #384B55;
+  --color-bg_purple: #463F48;
+  --color-fg: #D3C6AA;
+  --color-red: #E67E80;
+  --color-yellow: #DBBC7F;
+  --color-green: #A7C080;
+  --color-blue: #7FBBB3;
+  --color-purple: #D699B6;
+  --color-aqua: #83C092;
+  --color-orange: #E69875;
+  --color-grey0: #7A8478;
+  --color-grey1: #859289;
+  --color-grey2: #9DA9A0;
+}
+
 @font-face {
   font-family: 'Iosevka';
   src: url('/fonts/IosevkaNerdFont-Medium.ttf') format('truetype');
@@ -11,6 +37,6 @@ body {
   font-family: 'Iosevka', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: var(--color-bg1);
+  color: white;
 }

@@ -1,19 +1,18 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import Canvas from "../Canvas/Canvas.js";
 
 const RecursiveTree = () => {
   const canvasRef = useRef(null);
-  const angle = 90; // Angle for branching
-  const length = 100; // Initial length of the tree branches
+  const angle = 90;
+  const length = 80;
   const [branches, setBranches] = useState([]);
   const [currentBranchIndex, setCurrentBranchIndex] = useState(0);
+  const [canvasWidth, setCanvasWidth] = useState(585);
 
   const defineBranch = (startX, startY, angle, length) => {
-    if (length < 2) return; // Stop recursion if the branch is too short
+    if (length < 2) return;
 
-    // Calculate the end point of the branch
     const endX = startX + length * Math.cos((angle * Math.PI) / 180);
     const endY = startY - length * Math.sin((angle * Math.PI) / 180);
 
@@ -22,9 +21,19 @@ const RecursiveTree = () => {
       { startX, startY, endX, endY },
     ]);
 
-    // Recursively draw the left and right branches
-    defineBranch(endX, endY, angle - 15, length * 0.7); // Left branch
-    defineBranch(endX, endY, angle + 15, length * 0.7); // Right branch
+    defineBranch(endX, endY, angle - 30, length * 0.7);
+    defineBranch(endX, endY, angle + 30, length * 0.7);
+  };
+
+  const getLength = (startX, startY, endX, endY) => {
+    return Math.sqrt(
+      (endX - startX) * (endX - startX) + (endY - startY) * (endY - startY),
+    );
+  };
+
+  const getColorByLength = (length) => {
+    if (length > 20) return "#654321";
+    return "green";
   };
 
   const drawBranch = (ctx, branch) => {
@@ -32,6 +41,8 @@ const RecursiveTree = () => {
     ctx.beginPath();
     ctx.moveTo(startX, startY);
     ctx.lineTo(endX, endY);
+    const length = getLength(startX, startY, endX, endY);
+    ctx.strokeStyle = getColorByLength(length);
     ctx.stroke();
   };
 
@@ -40,7 +51,6 @@ const RecursiveTree = () => {
     const ctx = canvas.getContext("2d");
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.strokeStyle = "green";
     ctx.lineWidth = 2;
 
     ctx.save();
@@ -59,7 +69,7 @@ const RecursiveTree = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCurrentBranchIndex((prevIndex) => (prevIndex + 1) % branches.length);
+      setCurrentBranchIndex((prevIndex) => (prevIndex + 20) % branches.length);
     }, 140);
 
     return () => clearInterval(intervalId);
@@ -69,14 +79,21 @@ const RecursiveTree = () => {
     draw();
   }, [currentBranchIndex]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      width={600}
-      height={400}
-      style={{ border: "1px solid black" }}
-    />
-  );
+  useEffect(() => {
+    const handleResize = () => {
+      const newWidth = window.innerWidth < 768 ? 300 : 585;
+      setCanvasWidth(newWidth);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} width={canvasWidth} height={300} />;
 };
 
 export default RecursiveTree;

@@ -35,7 +35,10 @@ const RecursiveTree = () => {
     ctx.stroke();
   };
 
-  const draw = (ctx) => {
+  const draw = () => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.strokeStyle = "green";
     ctx.lineWidth = 2;
@@ -48,21 +51,27 @@ const RecursiveTree = () => {
     }
 
     ctx.restore();
-
-    if (currentBranchIndex < branches.length - 1) {
-      setCurrentBranchIndex((prevIndex) => prevIndex + 1);
-    } else {
-      setCurrentBranchIndex(0);
-    }
   };
 
   useEffect(() => {
     defineBranch(0, 0, angle, length);
   }, []);
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentBranchIndex((prevIndex) => (prevIndex + 1) % branches.length);
+    }, 140);
+
+    return () => clearInterval(intervalId);
+  }, [branches.length]);
+
+  useEffect(() => {
+    draw();
+  }, [currentBranchIndex]);
+
   return (
-    <Canvas
-      draw={draw}
+    <canvas
+      ref={canvasRef}
       width={600}
       height={400}
       style={{ border: "1px solid black" }}

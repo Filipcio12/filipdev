@@ -7,7 +7,7 @@ app.use(express.static(__dirname + "/public"));
 const port = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/public/views/workInProgress.html");
+  // res.sendFile(__dirname + "/public/views/workInProgress.html");
 });
 
 // custom 404 page

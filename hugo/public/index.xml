@@ -13,14 +13,14 @@
       <link>http://localhost:1313/articles/article_1/</link>
       <pubDate>Sun, 31 Aug 2025 14:47:49 +0200</pubDate>
       <guid>http://localhost:1313/articles/article_1/</guid>
-      <description>&lt;p&gt;Hello World!&lt;/p&gt;</description>
+      <description>Hello World!</description>
     </item>
     <item>
       <title>About</title>
       <link>http://localhost:1313/about/</link>
       <pubDate>Sun, 31 Aug 2025 14:43:14 +0200</pubDate>
       <guid>http://localhost:1313/about/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m Filip! I was born in 2003 and&#xA;I&amp;rsquo;m a Computer Science student at Lodz University of Technology in Poland.&#xA;This semester, I&amp;rsquo;m going to be writing my Bachelor&amp;rsquo;s thesis!&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;m very interested in programming, GNU/Linux, Neovim, chess, speedcubing and coffee.&#xA;I write articles about my passions to share some useful things I learned.&#xA;I also post progress reports on my ongoing projects here. Unfortunately, interesting&#xA;things take time to build so please bear with me :).&lt;/p&gt;</description>
+      <description>I&amp;rsquo;m Filip! I was born in 2003 and I&amp;rsquo;m a Computer Science student at Lodz University of Technology in Poland. This semester, I&amp;rsquo;m going to be writing my Bachelor&amp;rsquo;s thesis!&#xA;I&amp;rsquo;m very interested in programming, GNU/Linux, Neovim, chess, speedcubing and coffee. I write articles about my passions to share some useful things I learned. I also post progress reports on my ongoing projects here. Unfortunately, interesting things take time to build so please bear with me :).</description>
     </item>
   </channel>
 </rss>

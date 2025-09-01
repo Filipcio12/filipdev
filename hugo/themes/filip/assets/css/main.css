@@ -181,8 +181,8 @@
       max-width: 96rem;
     }
   }
-  .mx-2 {
-    margin-inline: calc(var(--spacing) * 2);
+  .mx-4 {
+    margin-inline: calc(var(--spacing) * 4);
   }
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
@@ -239,12 +239,12 @@
   font-style: normal;
 }
 html, body {
-  height: 100%;
-  width: 100%;
   margin: 0;
+  overflow-x: hidden;
 }
 body {
   font-family: 'Iosevka', sans-serif;
+  font-size: 1rem;
   margin: 0;
   padding: 0;
   background-color: var(--color-bg1);
@@ -255,9 +255,9 @@ body {
   align-items: center;
 }
 .container {
-  max-width: 612px;
-  width: 100%;
+  width: 60vw;
   margin-left: 1rem;
+  margin-right: 1rem;
 }
 .spacer {
   flex: 1;
@@ -276,10 +276,8 @@ a {
   text-decoration: none;
 }
 #nav-list {
-  border: 10px solid;
-  border-image: url("/frame.svg") 10 20 round;
-  max-width: 600px;
-  width: 100vw;
+  border: 1px solid;
+  width: 60vw;
 }
 h1 {
   font-size: 2em;
@@ -290,10 +288,6 @@ h1 {
   justify-content: center;
   align-items: center;
   text-align: center;
-  max-width: 600px;
-  width: 100vw;
-  max-height: 300px;
-  height: 100vh;
 }
 p {
   margin-bottom: 0.5em;
@@ -301,4 +295,15 @@ p {
 #picture-of-me {
   float: left;
   padding: 10px;
+}
+ul {
+  flex-wrap: wrap;
+}
+@media (max-width: 962px) {
+  #nav-list {
+    width: 90vw;
+  }
+  .container {
+    width: 90vw;
+  }
 }

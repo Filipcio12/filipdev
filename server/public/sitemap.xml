@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://filipdev.eu/articles/article_1/</loc>
+    <lastmod>2025-08-31T14:47:49+02:00</lastmod>
+  </url><url>
+    <loc>https://filipdev.eu/articles/</loc>
+    <lastmod>2025-08-31T14:47:49+02:00</lastmod>
+  </url><url>
+    <loc>https://filipdev.eu/about/</loc>
+    <lastmod>2025-08-31T14:43:14+02:00</lastmod>
+  </url><url>
+    <loc>https://filipdev.eu/</loc>
+    <lastmod>2023-01-01T08:00:00-07:00</lastmod>
+  </url><url>
+    <loc>https://filipdev.eu/categories/</loc>
+  </url><url>
+    <loc>https://filipdev.eu/tags/</loc>
+  </url>
+</urlset>

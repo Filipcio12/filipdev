@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home on Filip&#39;s Devlog</title>
+    <link>https://filipdev.eu/</link>
+    <description>Recent content in Home on Filip&#39;s Devlog</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 31 Aug 2025 14:47:49 +0200</lastBuildDate>
+    <atom:link href="https://filipdev.eu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Article_1</title>
+      <link>https://filipdev.eu/articles/article_1/</link>
+      <pubDate>Sun, 31 Aug 2025 14:47:49 +0200</pubDate>
+      <guid>https://filipdev.eu/articles/article_1/</guid>
+      <description>Hello World!</description>
+    </item>
+    <item>
+      <title>About</title>
+      <link>https://filipdev.eu/about/</link>
+      <pubDate>Sun, 31 Aug 2025 14:43:14 +0200</pubDate>
+      <guid>https://filipdev.eu/about/</guid>
+      <description>I&amp;rsquo;m Filip! I was born in 2003 and I&amp;rsquo;m a Computer Science student at Lodz University of Technology in Poland. This semester, I&amp;rsquo;m going to be writing my Bachelor&amp;rsquo;s thesis!&#xA;I&amp;rsquo;m very interested in programming, GNU/Linux, Neovim, chess, speedcubing and coffee. I write articles about my passions to share some useful things I learned. I also post progress reports on my ongoing projects here. Unfortunately, interesting things take time to build so please bear with me :).</description>
+    </item>
+  </channel>
+</rss>

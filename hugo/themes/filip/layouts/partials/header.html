@@ -1,2 +1,25 @@
-<h1>{{ site.Title }}</h1>
-{{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+<!-- <h1>{{ site.Title }}</h1>
+{{ partial "menu.html" (dict "menuID" "main" "page" .) }} -->
+
+<nav class="bg-bg0 p-4">
+  <div class="flex justify-center">
+    <ul id="nav-list" class="flex justify-center">
+      <li class="mx-2 md:mx-4 lg:mx-6">
+        <a href="/about" class="text-white hover:underline">About</a>
+      </li>
+      <li>✶</li>
+      <li class="mx-2 md:mx-4 lg:mx-6">
+        <a href="/portfolio" class="text-white hover:underline">Portfolio</a>
+      </li>
+      <li>✶</li>
+      <li class="mx-2 md:mx-4 lg:mx-6">
+        <a href="/articles" class="text-white hover:underline">Articles</a>
+      </li>
+      <li>✶</li>
+      <li class="mx-2 md:mx-4 lg:mx-6">
+        <a href="/donate" class="text-white hover:underline">Donate</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+

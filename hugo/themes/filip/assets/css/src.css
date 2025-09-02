@@ -100,7 +100,8 @@ p {
 }
 
 #picture-of-me {
-  border: 1px solid;
+  border: 3px solid;
+  border-color: var(--color-bg0);
   float: left;
   margin-right: 0.8em;
   margin-bottom: 0.8em;

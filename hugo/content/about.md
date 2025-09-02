@@ -13,4 +13,4 @@ I write articles about my passions to share some useful things I learned.
 I also post progress reports on my ongoing projects here. Unfortunately, interesting
 things take time to build so please bear with me :).
 
-If you want to contact me, you can send me an email or check out my socials:
+Here's where you can contact me!

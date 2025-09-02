@@ -79,6 +79,7 @@ a {
 
 #nav-list {
   border: 1px solid;
+  border-radius: 4px;
   width: 60vw;
 }
 
@@ -99,8 +100,13 @@ p {
 }
 
 #picture-of-me {
+  border: 1px solid;
   float: left;
-  padding: 10px;
+  margin-right: 0.8em;
+  margin-bottom: 0.8em;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
 }
 
 ul {
@@ -115,4 +121,45 @@ ul {
   .container {
     width: 90vw;
   }
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.card h2 {
+  font-size: 1.5em;
+  font-weight: bold; 
+}
+
+.card p {
+  font-size: 1em;
+}
+
+.card .date {
+  font-size: 0.9em;
+  color: var(--color-bg5);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  min-height: 3rem;
+}
+
+.logo {
+  float: left;
+  margin-right: 1em;
+  width: 32px;
+  height: 32px;
 }

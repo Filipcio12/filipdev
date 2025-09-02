@@ -1,7 +1,31 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
+<!--
   <img src="https://placehold.co/150" alt="Picture of me!" id="picture-of-me" />
+-->
+  <img src="/picture-of-me.jpg" alt="Picture of me!" id="picture-of-me" />
   {{ .Content }}
-  <img src="/github.svg" alt="Github logo" id="picture-of-me" />
+  <div class="logo-container">
+    <img src="/gmail.svg" class="logo" alt="Gmail logo"/>
+    filipfajfer2@gmail.com
+  </div>
+  <div class="logo-container">
+    <img src="/github.svg" class="logo" alt="Github logo"/>
+    <a href="https://github.com/Filipcio12/">Filipcio12</a>
+  </div>
+  <div class="logo-container">
+    <img src="/lichess.svg" class="logo" alt="Lichess logo"/>
+    <a href="https://lichess.org/@/Filipcio12">Filipcio12</a>
+  </div>
+<!--
+  <div class="logo-container">
+    <img src="/instagram.svg" class="logo" alt="Instagram logo"/>
+    myinsta
+  </div>
+  <div class="logo-container">
+    <img src="/linkedin.svg" class="logo" alt="Linkedin logo"/>
+    mylinkedin
+  </div>
+-->
   {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
 {{ end }}

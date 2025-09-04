@@ -13,14 +13,14 @@
       <link>http://localhost:1313/articles/article_2/</link>
       <pubDate>Tue, 02 Sep 2025 11:06:35 +0200</pubDate>
       <guid>http://localhost:1313/articles/article_2/</guid>
-      <description>&lt;p&gt;Hello World!&lt;/p&gt;</description>
+      <description>Hello World!</description>
     </item>
     <item>
-      <title>Lazy man&#39;s guide to Linux ricing</title>
+      <title>Basic guide to Linux customization</title>
       <link>http://localhost:1313/articles/ricing-guide/</link>
       <pubDate>Sun, 31 Aug 2025 14:47:49 +0200</pubDate>
       <guid>http://localhost:1313/articles/ricing-guide/</guid>
-      <description>&lt;p&gt;Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.&lt;/p&gt;&#xA;&lt;p&gt;Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.&lt;/p&gt;</description>
+      <description>If you know a little bit about Linux and you&amp;rsquo;ve used the command line and package managers before but haven&amp;rsquo;t really gotten into customizing your system, then this article might be for you.&#xA;Firstly, on the choice of distribution, I&amp;rsquo;m currently running Ubuntu 24 and I distro-hopped to Arch and Fedora a bunch before settling on it and, to be honest, I&amp;rsquo;m yet to find a truly meaningful difference between distros.</description>
     </item>
   </channel>
 </rss>

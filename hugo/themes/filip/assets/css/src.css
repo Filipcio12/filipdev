@@ -95,6 +95,15 @@ h1 {
   text-align: center;
 }
 
+.tetris-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  height: 300px;
+}
+
 p {
   margin-bottom: 0.5em;
 }
@@ -163,4 +172,21 @@ ul {
   margin-right: 1em;
   width: 32px;
   height: 32px;
+}
+
+button {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-bg0);
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+button:hover {
+  background-color: var(--color-bg_dim)
+}
+
+button:active {
+  transform: scale(0.95);
 }

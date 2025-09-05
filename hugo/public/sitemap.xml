@@ -2,10 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/projects/presto/</loc>
-    <lastmod>2025-09-02T16:34:47+02:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/projects/</loc>
+    <lastmod>2025-09-05T11:49:31+02:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/projects/tetris/</loc>
+    <lastmod>2025-09-05T11:49:31+02:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/projects/presto/</loc>
     <lastmod>2025-09-02T16:34:47+02:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/articles/article_2/</loc>

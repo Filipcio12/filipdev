@@ -24,6 +24,8 @@ const EMPTY = 0;
 const TAKEN = 1;
 let area = Array.from({ length: ROWS }, () => Array(COLS).fill(EMPTY));
 
+let isGameRunning = 0;
+
 // BORDERS
 const drawBorders = () => {
   ctx.strokeStyle = "white";
@@ -369,6 +371,9 @@ const update = (timestamp) => {
       startButton.innerText = "Play again?";
       startButton.style.display = "block";
       canvas.style.display = "none";
+
+      isGameRunning = false;
+
       return;
     }
   }
@@ -406,6 +411,9 @@ startButton.addEventListener("click", () => {
   gameOverText.style.display = "none";
   startButton.style.display = "none";
   canvas.style.display = "block";
+
+  isGameRunning = true;
+
   requestAnimationFrame(update);
 });
 
@@ -413,6 +421,10 @@ startButton.addEventListener("click", () => {
 // requestAnimationFrame(update);
 
 window.addEventListener("keydown", (event) => {
+  if (!isGameRunning) {
+    return;
+  }
+
   event.preventDefault();
 
   switch (event.key) {
@@ -435,6 +447,12 @@ window.addEventListener("keydown", (event) => {
 let startX, startY;
 
 window.addEventListener("touchstart", (event) => {
+  if (!isGameRunning) {
+    return;
+  }
+
+  event.preventDefault();
+
   const touch = event.touches[0];
   startX = touch.clientX;
   startY = touch.clientY;
@@ -443,12 +461,22 @@ window.addEventListener("touchstart", (event) => {
 window.addEventListener(
   "touchmove",
   (event) => {
+    if (!isGameRunning) {
+      return;
+    }
+
     event.preventDefault();
   },
   { passive: false },
 );
 
 window.addEventListener("touchend", (event) => {
+  if (!isGameRunning) {
+    return;
+  }
+
+  event.preventDefault();
+
   const touch = event.changedTouches[0];
   const deltaX = touch.clientX - startX;
   const deltaY = touch.clientY - startY;

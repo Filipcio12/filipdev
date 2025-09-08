@@ -9,11 +9,11 @@
     <lastBuildDate>Sun, 31 Aug 2025 14:47:49 +0200</lastBuildDate>
     <atom:link href="https://filipdev.eu/articles/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Article_1</title>
-      <link>https://filipdev.eu/articles/article_1/</link>
+      <title>Basic guide to Linux customization</title>
+      <link>https://filipdev.eu/articles/basic-guide-to-linux-customization/</link>
       <pubDate>Sun, 31 Aug 2025 14:47:49 +0200</pubDate>
-      <guid>https://filipdev.eu/articles/article_1/</guid>
-      <description>Hello World!</description>
+      <guid>https://filipdev.eu/articles/basic-guide-to-linux-customization/</guid>
+      <description>&lt;p&gt;If you know a little bit about Linux and you&amp;rsquo;ve used the command line&#xA;and package managers before but haven&amp;rsquo;t really gotten into customizing&#xA;your system, then this article might be for you.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

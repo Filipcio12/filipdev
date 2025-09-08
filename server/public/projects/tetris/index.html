@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
-<title>Presto | Filip&#39;s Devlog</title>
+<title>Tetris | Filip&#39;s Devlog</title>
 
-    <link rel="stylesheet" href="/css/main.css">
+      <link rel="stylesheet" href="/css/main.min.ceaaad495d6db02d4488634c453fcf70e678b19800a7abb3686a6e5785f66ab7.css" integrity="sha256-zqqtSV1tsC1EiGNMRT/PcOZ4sZgAp6uzaGpuV4X2arc=" crossorigin="anonymous">
 
 
-      <script src="/js/main.js"></script>
+      <script src="/js/main.23cd0c7d837263b9eaeb96ee2d9ccfa2969daa3fa00fa1c1fe8701a9b87251a1.js" integrity="sha256-I80MfYNyY7nq65buLZzPopadqj&#43;gD6HB/ocBqbhyUaE=" crossorigin="anonymous"></script>
 
 
 </head>
@@ -45,14 +45,31 @@
   <div class="container">
     <main>
       
-  <h1>Presto</h1>
+  <div class="tetris-container">
+  <p id="tetris-game-over" style="display: none;">Game over!</p>
+  <button id="tetris-start-button">Start game!</button>
+  <canvas id="tetris-canvas"
+    width="600" height="300"
+    style="display: none;">
+  </canvas>
+</div>
+<script type="module" src="/tetris/tetris.js"></script>
 
-  
-  
-  <time datetime="2025-09-02T16:34:47&#43;02:00">September 2, 2025</time>
+  <p>Mobile:</p>
+<ul>
+<li>swipe left – move left</li>
+<li>swipe right – move right</li>
+<li>swipe up – rotate</li>
+<li>swipe down – drop down</li>
+</ul>
+<p>Keyboard:</p>
+<ul>
+<li>arrow key left – move left</li>
+<li>arrow key right – move right</li>
+<li>arrow key up – rotate</li>
+<li>spacebar – drop down</li>
+</ul>
 
-  
-  
 
 
     </main>

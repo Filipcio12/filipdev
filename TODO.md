@@ -1,9 +1,4 @@
 # TODO
 
-- Use Everforest colorscheme.
-- Navbar at the top:
-  - portfolio
-  - articles
-  - about
-  - donate
-- Homepage has an animation (rotating polygon or growing bonsai).
+- Remap caps to escape outside of the i3 config.
+- Set up bluetooth connection.

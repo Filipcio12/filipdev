@@ -6,6 +6,12 @@ const gameOverText = document.getElementById("tetris-game-over");
 const ctx = canvas.getContext("2d");
 ctx.lineWidth = 1;
 
+const pieceLandedSound = new Audio("/tetris/piece_landed.wav");
+const movePieceSound = new Audio("/tetris/move_piece.wav");
+const lineClearSound = new Audio("/tetris/line_clear.wav");
+const gameOverSound = new Audio("/tetris/game_over.wav");
+const startGameSound = new Audio("/tetris/start_game.wav");
+
 const COLS = 10;
 const ROWS = 20;
 
@@ -17,6 +23,8 @@ const AREA_X = canvas.width / 2 - AREA_WIDTH;
 const EMPTY = 0;
 const TAKEN = 1;
 let area = Array.from({ length: ROWS }, () => Array(COLS).fill(EMPTY));
+
+let isGameRunning = 0;
 
 // BORDERS
 const drawBorders = () => {
@@ -162,6 +170,8 @@ class Piece {
   }
 
   place() {
+    pieceLandedSound.play();
+
     const color = this.type.color;
     const center = this.center;
     const rotationPtr = this.rotationPtr;
@@ -191,22 +201,28 @@ class Piece {
     this.center.x -= SQUARE_WIDTH;
     if (this.intersects()) {
       this.center.x += SQUARE_WIDTH;
+      return;
     }
+    movePieceSound.play();
   }
 
   moveRight() {
     this.center.x += SQUARE_WIDTH;
     if (this.intersects()) {
       this.center.x -= SQUARE_WIDTH;
+      return;
     }
+    movePieceSound.play();
   }
 
   rotate() {
     const rotationsNum = this.type.rotations.length;
     this.rotationPtr = (this.rotationPtr + 1) % rotationsNum;
     if (this.intersects()) {
-      this.rotationPtr = (this.rotationPtr - 1) % rotationsNum;
+      this.rotationPtr = (this.rotationPtr + rotationsNum - 1) % rotationsNum;
+      return;
     }
+    movePieceSound.play();
   }
 
   drop() {
@@ -263,6 +279,9 @@ class Piece {
 }
 
 const clearRow = (rowPtr) => {
+  lineClearSound.currentTime = 0.7;
+  lineClearSound.play();
+
   const row = area[rowPtr];
   row.forEach((element) => {
     element = EMPTY;
@@ -345,11 +364,16 @@ const update = (timestamp) => {
     }
 
     if (isGameOver()) {
+      gameOverSound.play();
+
       gameOverText.innerText = `Game over!\nYour score was: ${score}`;
       gameOverText.style.display = "block";
       startButton.innerText = "Play again?";
       startButton.style.display = "block";
       canvas.style.display = "none";
+
+      isGameRunning = false;
+
       return;
     }
   }
@@ -376,6 +400,9 @@ pieceQ.push(Math.floor(Math.random() * pieceTypes.length));
 
 const startButton = document.getElementById("tetris-start-button");
 startButton.addEventListener("click", () => {
+  startGameSound.currentTime = 0.2;
+  startGameSound.play();
+
   area = Array.from({ length: ROWS }, () => Array(COLS).fill(EMPTY));
   score = 0;
   piece = new Piece(pieceQ.shift());
@@ -384,6 +411,9 @@ startButton.addEventListener("click", () => {
   gameOverText.style.display = "none";
   startButton.style.display = "none";
   canvas.style.display = "block";
+
+  isGameRunning = true;
+
   requestAnimationFrame(update);
 });
 
@@ -391,6 +421,10 @@ startButton.addEventListener("click", () => {
 // requestAnimationFrame(update);
 
 window.addEventListener("keydown", (event) => {
+  if (!isGameRunning) {
+    return;
+  }
+
   event.preventDefault();
 
   switch (event.key) {
@@ -413,6 +447,12 @@ window.addEventListener("keydown", (event) => {
 let startX, startY;
 
 window.addEventListener("touchstart", (event) => {
+  if (!isGameRunning) {
+    return;
+  }
+
+  event.preventDefault();
+
   const touch = event.touches[0];
   startX = touch.clientX;
   startY = touch.clientY;
@@ -421,12 +461,22 @@ window.addEventListener("touchstart", (event) => {
 window.addEventListener(
   "touchmove",
   (event) => {
+    if (!isGameRunning) {
+      return;
+    }
+
     event.preventDefault();
   },
   { passive: false },
 );
 
 window.addEventListener("touchend", (event) => {
+  if (!isGameRunning) {
+    return;
+  }
+
+  event.preventDefault();
+
   const touch = event.changedTouches[0];
   const deltaX = touch.clientX - startX;
   const deltaY = touch.clientY - startY;

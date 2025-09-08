@@ -14,6 +14,8 @@
     --color-bg0: #272E33;
     --color-bg1: #2E383C;
     --color-bg5: #4F5B58;
+    --color-fg: #D3C6AA;
+    --color-red: #E67E80;
   }
 }
 @layer base {
@@ -289,6 +291,24 @@ h1 {
   font-size: 2em;
   margin: 0.5em 0;
 }
+h2 {
+  font-size: 1.5em;
+  margin: 0.5em 0;
+  color: var(--color-fg);
+}
+h3 {
+  font-size: 1.3em;
+  margin: 0.5em 0;
+  color: var(--color-fg);
+}
+h4 {
+  font-size: 1.17em;
+  margin: 0.5em 0;
+  color: var(--color-fg);
+}
+strong {
+  color: var(--color-red);
+}
 .rectree-container {
   display: flex;
   justify-content: center;
@@ -306,6 +326,16 @@ h1 {
 p {
   margin-bottom: 0.5em;
 }
+pre {
+  font-size: 0.8em;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+  min-height: 3em;
+  overflow-x: auto;
+}
+time {
+  color: var(--color-fg);
+}
 #picture-of-me {
   border: 3px solid;
   border-color: var(--color-bg0);
@@ -316,8 +346,13 @@ p {
   height: 150px;
   border-radius: 50%;
 }
+nav ul {
+  flex-wrap: wrap;
+  margin-bottom: 0;
+}
 ul {
   flex-wrap: wrap;
+  margin-bottom: 0.5em;
 }
 @media (max-width: 962px) {
   #nav-list {

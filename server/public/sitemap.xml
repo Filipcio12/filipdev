@@ -2,10 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://filipdev.eu/articles/article_1/</loc>
-    <lastmod>2025-08-31T14:47:49+02:00</lastmod>
+    <loc>https://filipdev.eu/projects/</loc>
+    <lastmod>2025-09-05T11:49:31+02:00</lastmod>
+  </url><url>
+    <loc>https://filipdev.eu/projects/tetris/</loc>
+    <lastmod>2025-09-05T11:49:31+02:00</lastmod>
   </url><url>
     <loc>https://filipdev.eu/articles/</loc>
+    <lastmod>2025-08-31T14:47:49+02:00</lastmod>
+  </url><url>
+    <loc>https://filipdev.eu/articles/basic-guide-to-linux-customization/</loc>
     <lastmod>2025-08-31T14:47:49+02:00</lastmod>
   </url><url>
     <loc>https://filipdev.eu/about/</loc>

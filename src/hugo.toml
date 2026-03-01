@@ -1,0 +1,15 @@
+baseURL = "https://filipdev.eu"
+languageCode = "pl-pl"
+title = "Filip Fajfer's Webpage"
+
+defaultContentLanguage = "pl"
+
+[languages]
+  [languages.en]
+    languageCode = "en"
+    contentDir = "content/en"
+    title = "Filip Fajfer's Blog"
+  [languages.pl]
+    languageCode = "pl"
+    contentDir = "content/pl"
+    title = "Blog Filipa Fajfer"

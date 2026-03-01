@@ -1,0 +1,245 @@
+/* ---------------------------- */
+/* Theme */
+/* ---------------------------- */
+
+:root {
+  /* Color palette */
+  --softBlack: #1c1c1c;
+  --warmBeige: #f5e8d8;
+  --mutedCoral: #ff6f61;
+  --goldenYellow: #daa520;
+  --burntOrange: #ff4500;
+
+  /* Light theme */
+  --bg: var(--warmBeige);
+  --text: var(--softBlack);
+  .logo {
+    filter: invert(1);
+  }
+}
+
+[data-theme="dark"] {
+  --bg: var(--softBlack);
+  --text: var(--warmBeige);
+  .logo {
+    filter: invert(0);
+  }
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: auto;
+  color: var(--text);
+}
+
+.theme-toggle::before {
+  content: "☽";
+}
+
+[data-theme="dark"] .theme-toggle::before {
+  content: "☀";
+}
+
+a {
+  color: var(--text);
+}
+
+nav a {
+  text-decoration: none;
+}
+
+/* ---------------------------- */
+/* Font */
+/* ---------------------------- */
+
+@font-face {
+  font-family: "Lato";
+  src: url("/fonts/Lato-Regular.ttf") format("truetype");
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-size: large;
+}
+
+/* ---------------------------- */
+/* Margins */
+/* ---------------------------- */
+
+body {
+  margin-left: 20vw;
+  margin-right: 20vw;
+}
+
+@media (max-width: 640px) {
+  body {
+    margin-left: 5vw;
+    margin-right: 5vw;
+  }
+}
+
+.rectree-container {
+  display: flex;
+  justify-content: center;
+}
+
+.tetris-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  margin-top: 20px;
+}
+
+#tetris-start-button {
+  align-self: center;
+  background-color: var(--text);
+  color: var(--bg);
+  font-weight: bold;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+#tetris-game-over {
+  align-self: center;
+}
+
+footer {
+  text-align: center;
+}
+
+/* ---------------------------- */
+/* Images */
+/* ---------------------------- */
+
+#picture-of-me {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.logo {
+  width: 24px;
+  height: 24px;
+}
+
+/* ---------------------------- */
+/* Navbar */
+/* ---------------------------- */
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .nav-toggle {
+    display: block;
+  }
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    height: 100vh;
+    width: 70%;
+    max-width: 300px;
+    background-color: var(--bg);
+    padding: 4rem 2rem;
+    gap: 1rem;
+    transition: left 0.3s ease;
+    z-index: 1000;
+    border-right: 1px solid var(--text);
+  }
+
+  .nav-links.open {
+    left: 0;
+  }
+}
+
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.nav-overlay.open {
+  display: block;
+}
+
+/* ---------------------------- */
+/* Language Switcher */
+/* ---------------------------- */
+
+.lang-switch {
+  font-size: 0.9rem;
+  text-decoration: none;
+  opacity: 0.4;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.lang-switch.active {
+  opacity: 1;
+  font-weight: bold;
+  background-color: var(--text);
+  color: var(--bg);
+  border-radius: 4px;
+}
+
+.lang-switch:hover {
+  opacity: 1;
+}
+
+/* ---------------------------- */
+/* Code blocks */
+/* ---------------------------- */
+
+pre {
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+}

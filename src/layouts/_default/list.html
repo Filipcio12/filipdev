@@ -6,7 +6,7 @@
     <div>
       <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
       <p>{{ .Summary }}</p>
-      <p class="date">{{ .Date.Format "January 2, 2006" }}</p>
+      <p class="date">{{ .Date | time.Format ":date_long" }}</p>
     </div>
   {{ end }}
   </div>

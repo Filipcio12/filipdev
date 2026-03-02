@@ -2,19 +2,19 @@
 title = 'Tetris'
 date = 2025-09-05T11:49:31+02:00
 layout = 'tetris-page'
-summary = "Try out my Tetris clone!"
+summary = "Zagraj w mój klon Tetrisa!"
 +++
 
-Mobile:
+Ekrany dotykowe:
 
-- swipe left – move left
-- swipe right – move right
-- swipe up – rotate
-- swipe down – drop down
+- przesuń w lewo – ruch blokiem w lewo
+- przesuń w prawo – ruch blokiem w prawo
+- przesuń w górę – obrót blokiem
+- przesuń w dół – zrzucenie bloku
 
-Keyboard:
+Klawiatura:
 
-- arrow key left – move left
-- arrow key right – move right
-- arrow key up – rotate
-- spacebar – drop down
+- strzałka w lewo – ruch blokiem w lewo
+- strzałka w prawo – ruch blokiem w prawo
+- strzałka w górę – obrót blokiem
+- spacja – zrzucenie bloku

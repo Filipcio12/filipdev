@@ -1,6 +1,5 @@
 # TODO
 
-- Button for copying code blocks.
 - Program the spinning cube.
 
 Post ideas:

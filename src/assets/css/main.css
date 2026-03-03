@@ -94,7 +94,7 @@ p {
   line-height: 1.7;
 }
 
-.rectree-container {
+.home-container {
   display: flex;
   justify-content: center;
 }
@@ -137,6 +137,7 @@ footer {
   height: 150px;
   object-fit: cover;
   border-radius: 50%;
+  border: 2px solid currentColor;
 }
 
 .logo {

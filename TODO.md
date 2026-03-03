@@ -1,7 +1,5 @@
 # TODO
 
-- Program the spinning cube.
-
 Post ideas:
 
 - Reading manga on Kindle.

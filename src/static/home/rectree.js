@@ -1,0 +1,92 @@
+const canvas = document.getElementById("homeCanvas");
+const ctx = canvas.getContext("2d");
+const angle = 90;
+const length = 80;
+let branches = [];
+let currentBranchIndex = 0;
+
+const defineBranch = (startX, startY, angle, length) => {
+  if (length < 2) return;
+
+  const endX = startX + length * Math.cos((angle * Math.PI) / 180);
+  const endY = startY - length * Math.sin((angle * Math.PI) / 180);
+
+  branches.push({ startX, startY, endX, endY });
+
+  defineBranch(endX, endY, angle - 30, length * 0.7);
+  defineBranch(endX, endY, angle + 30, length * 0.7);
+};
+
+const getLength = (startX, startY, endX, endY) => {
+  return Math.sqrt((endX - startX) ** 2 + (endY - startY) ** 2);
+};
+
+const getColorByLength = (length) => {
+  return length > 20 ? "#654321" : "green";
+};
+
+const drawBranch = (branch) => {
+  const { startX, startY, endX, endY } = branch;
+  ctx.beginPath();
+  ctx.moveTo(startX, startY);
+  ctx.lineTo(endX, endY);
+  const length = getLength(startX, startY, endX, endY);
+  ctx.strokeStyle = getColorByLength(length);
+  ctx.stroke();
+};
+
+const draw = () => {
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  ctx.lineWidth = 2;
+
+  ctx.save();
+  ctx.translate(ctx.canvas.width / 2, ctx.canvas.height);
+
+  for (let i = 0; i <= currentBranchIndex && i < branches.length; i++) {
+    drawBranch(branches[i]);
+  }
+
+  ctx.restore();
+};
+
+const animate = () => {
+  currentBranchIndex = (currentBranchIndex + 20) % branches.length;
+  draw();
+};
+
+const handleResize = () => {
+  const newWidth = window.innerWidth < 768 ? 300 : 585;
+  canvas.width = newWidth;
+  draw(); // Redraw after resizing
+};
+
+window.addEventListener("resize", handleResize);
+
+// Initialize
+let isAnimating = true;
+let animationInterval = null;
+
+const startAnimation = () => {
+  if (animationInterval) return; // already running
+  animationInterval = setInterval(animate, 140);
+  isAnimating = true;
+};
+
+const stopAnimation = () => {
+  clearInterval(animationInterval);
+  animationInterval = null;
+  isAnimating = false;
+};
+
+const toggleAnimation = () => {
+  isAnimating ? stopAnimation() : startAnimation();
+};
+
+canvas.addEventListener("click", toggleAnimation);
+
+// Initialize
+defineBranch(0, 0, angle, length);
+draw(); // Draw static tree initially, don't auto-start
+// defineBranch(0, 0, angle, length);
+// setInterval(animate, 140);
+// draw();

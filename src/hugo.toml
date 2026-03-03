@@ -12,4 +12,4 @@ defaultContentLanguage = "pl"
   [languages.pl]
     languageCode = "pl"
     contentDir = "content/pl"
-    title = "Blog Filipa Fajfer"
+    title = "Blog Filipa Fajfera"

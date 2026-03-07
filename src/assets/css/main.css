@@ -132,6 +132,13 @@ footer {
 /* Images */
 /* ---------------------------- */
 
+img:not(#picture-of-me):not(.logo) {
+  max-width: 680px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
 #picture-of-me {
   width: 150px;
   height: 150px;

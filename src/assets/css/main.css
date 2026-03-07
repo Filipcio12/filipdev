@@ -139,6 +139,12 @@ img:not(#picture-of-me):not(.logo) {
   margin: 0 auto;
 }
 
+@media (max-width: 768px) {
+  img:not(#picture-of-me):not(.logo) {
+    max-width: 100%;
+  }
+}
+
 #picture-of-me {
   width: 150px;
   height: 150px;

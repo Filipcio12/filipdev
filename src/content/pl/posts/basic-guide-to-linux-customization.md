@@ -57,18 +57,18 @@ nmcli con delete <SSID>
 ### i3 config
 
 Teraz, gdy możemy wygodnie czytać tekst i korzystać z Internetu, możemy rozpocząć właściwą konfigurację i3. Ścieżka do pliku konfiguracyjnego i3: ~/.config/i3/config. Jest to zwykły plik tekstowy. Moim zdaniem konfiguracja i3 składa się z trzech prostych części:
-- ✶ Programy/polecenia startowe
-- ✶ Skróty klawiszowe
-- ✶ Stylizacja
+- Programy/polecenia startowe
+- Skróty klawiszowe
+- Stylizacja
 
 ### Programy startowe
 
-- ✶ i3-lock – znajduje się w domyślnej konfigurację i3.
+- i3-lock – znajduje się w domyślnej konfigurację i3.
 Zmieniam tylko kolor tła. Blokuje ekran w trybie uśpienia.
-- ✶ nitrogen – prosty program z graficznym interfejsem użytkownika do ustawiania tapet.
-- ✶ picom – kompozytor okien, dodaje przezroczystość i animacje do okien.
-- ✶ redshift – bloker niebieskiego światła do użytku późnym popołudniem.
-- ✶ greenclip – menedżer schowka.
+- nitrogen – prosty program z graficznym interfejsem użytkownika do ustawiania tapet.
+- picom – kompozytor okien, dodaje przezroczystość i animacje do okien.
+- redshift – bloker niebieskiego światła do użytku późnym popołudniem.
+- greenclip – menedżer schowka.
 
 ```bash {style=gruvbox}
 exec --no-startup-id dex --autostart --environment i3

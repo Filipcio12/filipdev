@@ -92,18 +92,18 @@ start configuring i3 proper. The path to i3 configuration file:
 ~/.config/i3/config. It is a plain text file.
 In my mind, i3 configuration consists of three simple parts:
 
-- ✶ Startup programs/commands
-- ✶ Keybindings
-- ✶ Styling
+- Startup programs/commands
+- Keybindings
+- Styling
 
 ### Startup programs
 
-- ✶ i3-lock – comes with the default i3 config.
+- i3-lock – comes with the default i3 config.
 I just change the background color. Locks the screen on suspend.
-- ✶ nitrogen – simple GUI program for setting wallpapers.
-- ✶ picom – window compositor, adds transparency and animations to windows.
-- ✶ redshift – blue light blocker for use late in the day.
-- ✶ greenclip – clipboard manager.
+- nitrogen – simple GUI program for setting wallpapers.
+- picom – window compositor, adds transparency and animations to windows.
+- redshift – blue light blocker for use late in the day.
+- greenclip – clipboard manager.
 
 ```bash {style=gruvbox}
 exec --no-startup-id dex --autostart --environment i3

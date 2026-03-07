@@ -3,7 +3,7 @@ title = 'What to do with AppImages?'
 date = 2026-03-07T18:28:02+01:00
 +++
 
-AppImages are technically the easiest Linux apps to install. You simply download them and run them, so where's the problem? Well, despite that convenience you can't immediately run them from any path in the command line and app launcher can't find them either.
+AppImages are technically the easiest Linux apps to install. You simply download them and run them, so where's the problem? Well, despite that convenience you can't immediately run them from any path in the command line and app launchers can't find them either.
 
 <!--more-->
 
@@ -23,7 +23,7 @@ sudo ln -s /home/filip/AppImages/love-11.5-x86_64.AppImage /usr/local/bin/love
 
 For example, this is how I _installed_ [**LÖVE**](https://www.love2d.org/) with an AppImage. It's worth noting that when using **ln** command you should use absolute paths.
 
-## Dla graficznych
+## For desktop apps
 
 For desktop apps I create .desktop file which lets app launcher to detect the program. Desktop entry files have to be placed in the /usr/share/applications (system-wide) or ~/.local/share/applications/ (user only) directory.
 

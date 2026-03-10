@@ -21,6 +21,8 @@ Warto też skonfigurować ssh za pomocą pliku ~/.ssh/config.
 Host *
   SendEnv TERM
   SetEnv TERM=xterm
+  ServerAliveInterval 15
+  ServerAliveCountMax 3
 
 Host <alias>
     HostName <host>
@@ -29,7 +31,7 @@ Host <alias>
     IdentityFile <ssh-key>
 ```
 
-Pierwszy blok z "*" służy po to, żeby dla każdego hosta przesyłać zmienną środowiskową TERM=xterm. Dzięki niej zdalny terminal będzie na pewno korzystał z tej samej interpretacji klawiszy (dzięki temu BACKSPACE będzie na pewno działać).
+Pierwszy blok z "*" służy po to, żeby dla każdego hosta przesyłać zmienną środowiskową TERM=xterm. Dzięki niej zdalny terminal będzie na pewno korzystał z tej samej interpretacji klawiszy (dzięki temu BACKSPACE będzie na pewno działać). Opcja "ServerAliveInterval" sprawia, że klient będzie co 15 sekund wysyłał sygnał do serwera, natomiast opcja "ServerAliveCountMax" sprawia, że jeśli klient nie uzyska odpowiedzi od serwera 3 razy, to wtedy połączenie zostanie zamknięte. To jest przydatne, ponieważ dzięki temu nie muszę zamykać całego okna w terminalu, kiedy serwer przestaje odpowiadać.
 
 ## SFTP
 

@@ -7,7 +7,7 @@ AppImages are technically the easiest Linux apps to install. You simply download
 
 <!--more-->
 
-So what am I to do? Do I have to remember where I put every AppImage? Or store them all in one directory? Yea... That's the simplest solution. For organizational purposes I created ~/AppImages/ directory. Luckily, that's not where I have to end this. There are two types of apps that AppImages can replace: terminal and desktop apps. But first, AppImage needs to have execute permissions to work at all.
+So what am I to do? Do I have to remember where I put every AppImage? Or store them all in one directory? Yea... That's the simplest solution. For organizational purposes I created ~/AppImages/ directory. Luckily, that's not where it has to end. There are two types of apps that AppImages can replace: terminal and desktop apps. But first, AppImage needs to have execute permissions to work at all.
 
 ```bash {style=gruvbox}
 chmod +x love-11.5-x86_64.AppImage

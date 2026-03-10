@@ -31,7 +31,7 @@ Tutaj warto stworzyć plik .desktop, dzięki któremu launchery aplikacji będą
 ./Tiled-1.11.2_Linux_Qt-6_x86_64.AppImage --appimage-extract
 ```
 
-Korzystając z powyższej komeny, można rozpakować AppImage i wtedy powstanie folder squashfs-root/, w którym będzie znaleźć ikonkę aplikacji. Potem można ją skopiować, wrzucić do wspólnego katalogu w ~/AppImages/ i umieścić ścieżkę w .desktop.
+Korzystając z powyższej komendy, można rozpakować AppImage i wtedy powstanie folder squashfs-root/, w którym będzie można znaleźć ikonkę aplikacji. Potem można ją skopiować, wrzucić do wspólnego katalogu w ~/AppImages/ i umieścić ścieżkę w .desktop.
 
 ```bash {style=gruvbox}
 [Desktop Entry]

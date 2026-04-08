@@ -82,15 +82,15 @@ $$
 Poniższa pochodna przyda się przy obliczeniach później.
 
 $$
-\frac{\partial}{\partial z_i}(\sum_{k=1}^{c} e^{z_k})
+\frac{\partial}{\partial z_j}\left[\sum_{k=1}^{c} e^{z_k}\right]
 $$
 
 $$
-= \frac{\partial}{\partial z_i}(e^{z_1} + \ldots + e^{z_i} + \ldots + e^{z_c})
+= \frac{\partial}{\partial z_j}(e^{z_1} + \ldots + e^{z_j} + \ldots + e^{z_c})
 $$
 
 $$
-= e^{z_i}
+= e^{z_j}
 $$
 
 Tutaj musimy użyć inną zmienną (w tym przypadku $k$) do iteracji sumy, ponieważ licząc pochodną po $z_j$, chcemy policzyć pochodną po $j$-tym elemencie wektora $\underline{z}$, a nie po wszystkich elementach.
@@ -98,7 +98,7 @@ Tutaj musimy użyć inną zmienną (w tym przypadku $k$) do iteracji sumy, ponie
 Kiedy $i = j$ (na przekątnej):
 
 $$
-\frac{\partial \sigma _i}{\partial z_i} = \frac{\partial}{\partial z_i}(\frac{e^{z_i}}{ \sum_{k=1}^{c} e^{z_k}})
+\frac{\partial \sigma _i}{\partial z_i} = \frac{\partial}{\partial z_i}\left[\frac{e^{z_i}}{ \sum_{k=1}^{c} e^{z_k}}\right]
 $$
 
 $$
@@ -106,15 +106,15 @@ $$
 $$
 
 $$
-= \frac{e^{z_i}}{\sum_{k=1}^{c} e^{z_k}} - (\frac{e^{z_i}}{\sum_{k=1}^{c} e^{z_k}})^2
+= \frac{e^{z_i}}{\sum_{k=1}^{c} e^{z_k}} - \left[\frac{e^{z_i}}{\sum_{k=1}^{c} e^{z_k}}\right]^2
 $$
 
 $$
-= \sigma(\underline{z})_i - \sigma^2(\underline{z})_i
+= \sigma_i - \sigma^2_i
 $$
 
 $$
-= \sigma(\underline{z})_i(1 - \sigma(\underline{z})_i)
+= \sigma_i(1 - \sigma_i)
 $$
 
 Widać tutaj jasną analogię do sigmoida.
@@ -122,7 +122,7 @@ Widać tutaj jasną analogię do sigmoida.
 Kiedy $i \ne j$ (nie na przekątnej):
 
 $$
-\frac{\partial \sigma _i}{\partial z_j} = e^{z_i} \frac{\partial}{\partial z_j}(\frac{1}{\sum_{k=1}^{c} e^{z_k}})
+\frac{\partial \sigma _i}{\partial z_j} = e^{z_i} \frac{\partial}{\partial z_j}\left[\frac{1}{\sum_{k=1}^{c} e^{z_k}}\right]
 $$
 
 $$
@@ -134,7 +134,7 @@ $$
 $$
 
 $$
-= -\sigma(\underline{z})_i \sigma(\underline{z})_j
+= -\sigma_i \sigma_j
 $$
 
 Zatem cała macierz Jacobiego będzie wyglądać:
@@ -145,6 +145,44 @@ $$J = \left[\begin{smallmatrix}
 \vdots & \vdots & \ddots & \vdots \\
 -\sigma _c \sigma_1 & -\sigma _c \sigma_2 & \cdots & \sigma _c(1 - \sigma _c)
 \end{smallmatrix}\right]$$
+
+### Delta Kroneckera
+
+\[
+\delta_{ij} =
+\begin{cases}
+1 & \text{dla } i = j \\
+0 & \text{dla } i \ne j
+\end{cases}
+\]
+
+Delta Kroneckera to funkcja, której używa się do uproszczenia zapisu złożonych wzorów.
+
+\[
+\frac{\partial \sigma _i}{\partial z_j} =
+\begin{cases}
+\sigma_i(1 - \sigma_i) & \text{dla } i = j \\
+-\sigma_i \sigma_j & \text{dla } i \ne j
+\end{cases}
+\]
+
+$$
+= \delta_{ij}(\sigma_i(1 - \sigma_i)) + (1 - \delta_{ij})(-\sigma_i \sigma_j)
+$$
+
+$$
+= \delta_{ij}\sigma_i - \delta_{ij}\sigma^2_i - \sigma_i \sigma_j + \delta_{ij}\sigma_i \sigma_j
+$$
+
+Wyrażenia, przy których jest $\delta_{ij}$ będą w wyniku tylko jeśli $i = j$.
+
+$$
+= \delta_{ij}\sigma_i - \delta_{ij}\sigma^2_i - \sigma_i \sigma_j + \delta_{ij}\sigma^2_i
+$$
+
+$$
+\frac{\partial \sigma _i}{\partial z_j} = \sigma_i (\delta_{ij} - \sigma_j)
+$$
 
 ## Wieloklasowa entropia krzyżowa
 
@@ -219,27 +257,7 @@ $$
 Pochodna $p_i$ po $z_j$:
 
 $$
-\frac{\partial p_i}{\partial z_j} = \frac{\partial}{\partial z_j}(\sigma(\underline{z})_i)
-$$
-
-Jeśli $i = j$:
-
-$$
-\frac{\partial p_i}{\partial z_j} = \sigma(\underline{z})_j (1 - \sigma(\underline{z})_j)
-$$
-
-$$
-= p_j(1 - p_j)
-$$
-
-Jeśli $i \ne j$:
-
-$$
-\frac{\partial p_i}{\partial z_j} = - \sigma(\underline{z})_i \sigma(\underline{z})_j
-$$
-
-$$
-= - p_i p_j
+\frac{\partial p_i}{\partial z_j} = p_i (\delta_{ij} - p_j)
 $$
 
 Pochodna $L_i$ po $p_i$:
@@ -248,61 +266,35 @@ $$
 \frac{\partial L_i}{\partial p_i} = - \frac{y_i}{p_i}
 $$
 
-Teraz pora policzyć wszystko razem dla dwóch różnych przypadków.
+Pochodna $L_i$ po $w_j$:
 
 $$
 \frac{\partial L_i}{\partial \underline{w}_j} = \frac{\partial L_i}{\partial p_i} \frac{\partial p_i}{\partial z_j} \frac{\partial z_j}{\partial \underline{w}_j}
 $$
 
 $$
-= - \frac{y_i}{p_i} \frac{\partial p_i}{\partial z_j} \underline{x}
-$$
-
-Jeśli $i = j$:
-
-$$
-\frac{\partial L_i}{\partial \underline{w}_j} = - \frac{y_j}{p_j} [p_j(1 - p_j)] \underline{x}
+= - \frac{y_i}{p_i} (p_i (\delta_{ij} - p_j)) \underline{x}
 $$
 
 $$
-= (y_j p_j - y_j)\underline{x}
+= (p_j y_i - y_j \delta_{ij}) \underline{x}
 $$
 
-Jeśli $i \ne j$:
+Pochodna $L$ po $w_j$:
 
 $$
-\frac{\partial L_i}{\partial \underline{w}_j} = - \frac{y_i}{p_i} [-p_i p_j] \underline{x}
-$$
-
-$$
-= y_i p_j \underline{x}
-$$
-
-Teraz sumujemy wszystko po klasach, żeby dostać pochodną $L$ po $\underline{w}_j$:
-
-$$
-\frac{\partial L}{\partial \underline{w}_j} = (y_j p_j - y_j)\underline{x} + \sum_{\substack{i=1 \\ i \neq j}}^{c} (y_i p_j \underline{x})
+\frac{\partial L}{\partial \underline{w}_j} = \sum_{i=1}^{c} (p_j y_i - y_j \delta_{ij}) \underline{x}
 $$
 
 $$
-= (y_j p_j - y_j)\underline{x} + p_j \underline{x} \sum_{\substack{i=1 \\ i \neq j}}^{c} y_i
-$$
-
-$$
-= (y_j p_j - y_j)\underline{x} + p_j \underline{x} ((\sum_{i = 1}^{c} y_i )- y_j)
-$$
-
-$$
-= (y_j p_j - y_j)\underline{x} + p_j \underline{x} (1 - y_j)
-$$
-
-$$
-= (y_j p_j - y_j + p_j - y_j p_j)\underline{x}
+= \left[p_j \sum_{i=1}^{c} y_i - y_j \sum_{i=1}^{c} \delta_{ij} \right] \underline{x}
 $$
 
 $$
 = (p_j - y_j) \underline{x}
 $$
+
+Ponieważ $\underline{y}$ jest one-hot, to suma jego elementów jest równa $1$. Natomiast $\delta_{ij}$ jest równa jeden tylko dla $i = j$, ale dla reszty jest równa $0$, więc ta suma również musi być równa $1$.
 
 Metoda gradientu prostego:
 

@@ -18,11 +18,11 @@ $$
 Pochodna logarytmu o podstawie a:
 
 $$
-\frac{d}{dx} \log _a (x) = \frac{d}{dx} (\frac{\ln(x)}{\ln(a)})
+\frac{d}{dx} \log _a (x) = \frac{d}{dx} \left[\frac{\ln(x)}{\ln(a)}\right]
 $$
 
 $$
-= \frac{d}{dx} (\frac{1}{\ln(a)} \ln(x)) = \frac{1}{x \ln(a)}
+= \frac{d}{dx} \left[\frac{1}{\ln(a)} \ln(x)\right] = \frac{1}{x \ln(a)}
 $$
 
 Użycie logarytmu o innej podstawie przy stracie logarytmicznej wpływa jedynie na ten stały współczynnik $\frac{1}{\ln(a)}$, więc w sumie nie ma to znaczenia. Dlatego w literaturze można spotkać $\log$ oznaczające logarytm naturalny. W tym wpisie będę używać oznaczenia $\ln$ dla jasności.
@@ -30,7 +30,7 @@ Użycie logarytmu o innej podstawie przy stracie logarytmicznej wpływa jedynie 
 Pochodna ilorazu:
 
 $$
-\frac{d}{dx}(\frac{f(x)}{g(x)}) = \frac{\frac{df}{dx} g(x) - f(x)\frac{dg}{dx}}{g^2(x)}
+\frac{d}{dx}\left[\frac{f(x)}{g(x)}\right] = \frac{\frac{df}{dx} g(x) - f(x)\frac{dg}{dx}}{g^2(x)}
 $$
 
 Pochodna $e^x$:
@@ -52,11 +52,11 @@ $$
 $$
 
 $$
-= \frac{e^z}{e^z + 1} - (\frac{e^z}{e^z + 1})^2 = \sigma(z) - \sigma^2(z)
+= \frac{e^z}{e^z + 1} - \left[\frac{e^z}{e^z + 1}\right]^2 = \sigma - \sigma^2
 $$
 
 $$
-= \sigma(z)(1 - \sigma(z))
+= \sigma(1 - \sigma)
 $$
 
 ## Logit
@@ -195,13 +195,13 @@ $$
 Pochodna $L$ po $p$:
 
 $$
-\frac{\partial L}{\partial p} = -[\frac{y}{p} + \frac{y - 1}{1 - p}]
+\frac{\partial L}{\partial p} = -\left[\frac{y}{p} + \frac{y - 1}{1 - p}\right]
 $$
 
 Pochodna $L$ po $\underline{w}$:
 
 $$
-\frac{\partial L}{\partial \underline{w}} = -[\frac{y}{p} + \frac{y - 1}{1 - p}] p(1 - p) \underline{x}
+\frac{\partial L}{\partial \underline{w}} = -\left[\frac{y}{p} + \frac{y - 1}{1 - p}\right] p(1 - p) \underline{x}
 $$
 
 $$

@@ -88,155 +88,139 @@ $$
 ## Funkcje straty
 
 $$
-t^i \in \{0, 1\}
+y \in \{0, 1\}
 $$
 
 $$
-z^i = \underline{x}^i \underline{w}
+z = \underline{x} \underline{w}
 $$
 
 $$
-p^i = \sigma(z^i)
+p = \sigma(z)
 $$
 
-$t^i$ — etykieta próbki $\underline{x}^i$
+$y$ — etykieta próbki $\underline{x}$
 
-$z^i$ — logit próbki $\underline{x}^i$
+$z$ — logit próbki $\underline{x}$
 
-$p^i$ — prawdopodobieństwo przynależności próbki $\underline{x}^i$ do klasy $1$
-
-$$
-\underline{z} = [z^1, z^2, \ldots, z^n]^T
-$$
+$p$ — prawdopodobieństwo przynależności próbki $\underline{x}$ do klasy $1$
 
 $$
-\underline{p} = [p^1, p^2, \ldots, p^n]^T
+\underline{z} = [z_1, z_2, \ldots, z_n]^\top
+$$
+
+$$
+\underline{p} = [p_1, p_2, \ldots, p_n]^\top
 $$
 
 $\underline{z}$ — wektor logitów
 
 $\underline{p}$ — wektor prawdopodobieństw
 
-Niestety ponieważ sigmoid zdefiniowałem jako funkcję, która przyjmuje skalar oraz zwraca skalar, to będę musiał wyprowadzić metodę gradientu prostego na skalarach.
+Niestety ponieważ sigmoid zdefiniowałem jako funkcję, która przyjmuje skalar oraz zwraca skalar, to będę musiał wyprowadzić metodę gradientu prostego na skalarach. Pochodną funkcji straty obliczam dla jednej próbki.
 
 ### Błąd kwadratowy
 
 $$
-L = \sum_{i=1}^{n} L^i
+L = \frac{1}{2} (p - y)^2
 $$
 
 $$
-L^i = \frac{1}{2} (p^i - t^i)^2
+\frac{\partial L}{\partial \underline{w}} = \frac{\partial L}{\partial p} \frac{\partial p}{\partial \underline{w}}
+$$
+
+Pochodna $p$ po $\underline{w}$:
+
+$$
+\frac{\partial p}{\partial \underline{w}} = \frac{\partial \sigma}{\partial z} \frac{\partial z}{\underline{w}}
 $$
 
 $$
-\frac{\partial L^i}{\partial \underline{w}} = \frac{\partial L^i}{\partial p^i} \frac{\partial p^i}{\partial \underline{w}}
-$$
-
-Pochodna $p^i$ po $\underline{w}$:
-
-$$
-\frac{\partial p^i}{\partial \underline{w}} = \frac{\partial \sigma}{\partial z^i} \frac{\partial z^i}{\underline{w}}
+= \sigma(z)(1 - \sigma(z)) \frac{\partial}{\partial \underline{w}}(\underline{x} \underline{w})
 $$
 
 $$
-= \sigma(z^i)(1 - \sigma(z^i)) \frac{\partial}{\partial \underline{w}}(\underline{x}^i \underline{w})
+= p(1 - p) \underline{x} \\
+$$
+
+Pochodna $L$ po $p$:
+
+$$
+\frac{\partial L}{\partial p} = \frac{1}{2} \cdot 2 (p - y) \cdot 1
 $$
 
 $$
-= p^i(1 - p^i) \underline{x}^{(i)T} \\
+\frac{\partial L}{\partial p} = p - y
 $$
 
-Pochodna $L^i$ po $p^i$:
+Pochodna $L$ po $\underline{w}$:
 
 $$
-\frac{\partial L^i}{\partial p^i} = \frac{1}{2} \cdot 2 (p^i - t^i) \cdot 1
-$$
-
-$$
-\frac{\partial L^i}{\partial p^i} = p^i - t^i
-$$
-
-Pochodna $L^i$ po $\underline{w}$:
-
-$$
-\frac{\partial L^i}{\partial \underline{w}} = \frac{\partial L^i}{\partial p^i} \frac{\partial p^i}{\partial \underline{w}}
+\frac{\partial L}{\partial \underline{w}} = \frac{\partial L}{\partial p} \frac{\partial p}{\partial \underline{w}}
 $$
 
 $$
-\frac{\partial L^i}{\partial \underline{w}} = (p^i - t^i) p^i (1 - p^i)\underline{x}^{(i)T}
+\frac{\partial L}{\partial \underline{w}} = (p - y) p (1 - p)\underline{x}
 $$
 
-Metoda gradientu prostego
+Metoda gradientu prostego:
 
 $$
-\frac{\partial L}{\partial \underline{w}} = \sum_{i=1}^{n} (p^i - t^i) p^i (1 - p^i)\underline{x}^{(i)T}
+\Delta \underline{w} = - \eta \underline{x}^\top (p - y) p (1 - p)
 $$
 
-$$
-\Delta \underline{w} = - \eta \sum_{i=1}^{n} (p^i - t^i) p^i (1 - p^i)\underline{x}^{(i)T}
-$$
-
-Postać macierzowa:
+Postać macierzowa (dla całego zbioru próbek):
 
 $$
-\Delta \underline{w} = -\eta X^T (\underline{p} - \underline{t})\underline{p}^T(1 - \underline{p}) \\
+\Delta \underline{w} = -\eta X^\top (\underline{p} - \underline{y})\underline{p}^\top(1 - \underline{p}) \\
 \tiny{{(d, 1) = (d, n)(n, 1)(1, n)(n, 1)}}
 $$
 
 ### Binarna entropia krzyżowa
 
 $$
-L = \sum_{i=1}^{n} L^i
+L = -[y \ln(p) + (1 - y) \ln(1 - p)]
 $$
 
 $$
-L^i = -[t^i \ln(p^i) + (1 - t^i) \ln(1 - p^i)]
+\frac{\partial L}{\partial \underline{w}} = \frac{\partial L}{\partial p} \frac{\partial p}{\partial \underline{w}}
+$$
+
+Pochodna $p$ po $\underline{w}$:
+
+$$
+\frac{\partial p}{\partial \underline{w}} = p(1 - p) \underline{x} \\
+$$
+
+Pochodna $L$ po $p$:
+
+$$
+\frac{\partial L}{\partial p} = -[\frac{y}{p} + \frac{y - 1}{1 - p}]
+$$
+
+Pochodna $L$ po $\underline{w}$:
+
+$$
+\frac{\partial L}{\partial \underline{w}} = -[\frac{y}{p} + \frac{y - 1}{1 - p}] p(1 - p) \underline{x}
 $$
 
 $$
-\frac{\partial L^i}{\partial \underline{w}} = \frac{\partial L^i}{\partial p^i} \frac{\partial p^i}{\partial \underline{w}}
-$$
-
-Pochodna $p^i$ po $\underline{w}$:
-
-$$
-\frac{\partial p^i}{\partial \underline{w}} = p^i(1 - p^i) \underline{x}^{(i)T} \\
-$$
-
-Pochodna $L^i$ po $p^i$:
-
-$$
-\frac{\partial L^i}{\partial p^i} = -[\frac{t^i}{p^i} + \frac{t^i - 1}{1 - p^i}]
-$$
-
-Pochodna $L^i$ po $\underline{w}$:
-
-$$
-\frac{\partial L^i}{\partial \underline{w}} = -[\frac{t^i}{p^i} + \frac{t^i - 1}{1 - p^i}] p^i(1 - p^i) \underline{x}^{(i)T}
+= -[y(1 - p)  + (y - 1) p] \underline{x}
 $$
 
 $$
-= -\underline{x}^{(i)T}[t^i(1 - p^i)  + (t^i - 1) p^i]
+= (p - y) \underline{x}
 $$
 
-$$
-= \underline{x}^{(i)T} (p^i - t^i)
-$$
-
-Metoda gradientu prostego
+Metoda gradientu prostego:
 
 $$
-\frac{\partial L}{\partial \underline{w}} = \sum_{i=1}^{n} \underline{x}^{(i)T} (p^i - t^i)
+\Delta \underline{w} = -\eta \underline{x}^\top (p - y)
 $$
 
-$$
-\Delta \underline{w} = -\eta \sum_{i=1}^{n} \underline{x}^{(i)T} (p^i - t^i)
-$$
-
-Postać macierzowa
+Postać macierzowa (dla całego zbioru próbek):
 
 $$
-\Delta \underline{w} = -\eta X^T (\underline{p} - \underline{t}) \\
+\Delta \underline{w} = -\eta X^\top (\underline{p} - \underline{y}) \\
 \tiny{(d, 1) = (d, n)(n, 1)}
 $$

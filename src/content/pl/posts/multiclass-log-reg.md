@@ -12,7 +12,7 @@ Prezentuję tutaj moje wyprowadzenie wzorów związanych z wieloklasową regresj
 Softmax to generalizacja sigmoida dla więcej niż dwóch klas albo raczej na odwrót; sigmoid jest szczególnym przypadkiem funkcji softmax.
 
 $$
-\sigma(\underline{z})_j = \frac{e^{z_j}}{\sum_{k=1}^{c} e^{z_k}} = p_j
+\sigma(\underline{z})_i = \frac{e^{z_i}}{\sum_{j=1}^{c} e^{z_j}} = p_i
 $$
 
 $$
@@ -62,7 +62,7 @@ $$
 $$
 
 $$
-J = \begin{pmatrix}
+J = \begin{bmatrix}
 \dfrac{\partial \sigma_1}{\partial z_1} 
 & \dfrac{\partial \sigma_1}{\partial z_2} 
 & \cdots 
@@ -76,7 +76,7 @@ J = \begin{pmatrix}
 & \dfrac{\partial \sigma _c}{\partial z_2}
 & \cdots 
 & \dfrac{\partial \sigma _c}{\partial z_c}
-\end{pmatrix}_{ij}
+\end{bmatrix}_{ij}
 $$
 
 Poniższa pochodna przyda się przy obliczeniach później.
@@ -92,6 +92,8 @@ $$
 $$
 = e^{z_i}
 $$
+
+Tutaj musimy użyć inną zmienną (w tym przypadku $k$) do iteracji sumy, ponieważ licząc pochodną po $z_j$, chcemy policzyć pochodną po $j$-tym elemencie wektora $\underline{z}$, a nie po wszystkich elementach.
 
 Kiedy $i = j$ (na przekątnej):
 
@@ -137,24 +139,24 @@ $$
 
 Zatem cała macierz Jacobiego będzie wyglądać:
 
-$$J = \left(\begin{smallmatrix}
+$$J = \left[\begin{smallmatrix}
 \sigma_1(1 - \sigma_1) & -\sigma_1 \sigma_2 & \cdots & -\sigma_1 \sigma_c \\
 -\sigma_2 \sigma_1 & \sigma_2(1 - \sigma_2) & \cdots & -\sigma_2 \sigma_c \\
 \vdots & \vdots & \ddots & \vdots \\
 -\sigma _c \sigma_1 & -\sigma _c \sigma_2 & \cdots & \sigma _c(1 - \sigma _c)
-\end{smallmatrix}\right)$$
+\end{smallmatrix}\right]$$
 
 ## Wieloklasowa entropia krzyżowa
 
 Żeby zastosować regresję logistyczną dla wielu klas, trzeba stworzyć zestaw wag dla każdej z klas z osobna.
 
 $$
-W = \begin{pmatrix}
-w^1_1 & w^1_2 & \cdots & w^1_c \\
-w^2_1 & w^2_2 & \cdots & w^2_c \\
+W = \begin{bmatrix}
+w_{1 1} & w_{1 2} & \cdots & w_{1 c} \\
+w_{2 1} & w_{2 2} & \cdots & w_{2 c} \\
 \vdots  & \vdots  & \ddots & \vdots  \\
-w^d_1 & w^d_2 & \cdots & w^d_c
-\end{pmatrix}
+w_{d 1} & w_{d 2} & \cdots & w_{d c}
+\end{bmatrix}
 $$
 
 $W$ — macierz wag o wymiarach $(d, c)$
@@ -164,138 +166,153 @@ $d$ — liczba cech (wejść)
 $c$ — liczba klas (wyjść)
 
 $$
-T = \begin{pmatrix}
-t^1_1 & t^1_2 & \cdots & t^1_c \\
-t^2_1 & t^2_2 & \cdots & t^2_c \\
+Y = \begin{bmatrix}
+y_{1 1} & y_{1 2} & \cdots & y_{1 c} \\
+y_{2 1} & y_{2 2} & \cdots & y_{2 c} \\
 \vdots  & \vdots  & \ddots & \vdots  \\
-t^n_1 & t^n_2 & \cdots & t^n_c
-\end{pmatrix}
+y_{n 1} & y_{n 2} & \cdots & y_{n c}
+\end{bmatrix}
 $$
 
-$T$ — macierz one-hot etykiet o wymiarach $(n, c)$
+$Y$ — macierz one-hot etykiet o wymiarach $(n, c)$
 
 $n$ — liczba próbek
 
 $$
-\underline{t}^i = [0, 0, \ldots, 1, \ldots, 0]
+\underline{y} = [0, 0, \ldots, 1, \ldots, 0]
 $$
 
 $$
-\underline{z^i} = \underline{x}^i W
+\underline{z} = \underline{x} W
 $$
 
 $$
-p^i_j = \sigma(\underline{z^i})_j
+p_i = \sigma(\underline{z})_i
 $$
 
-$\underline{t}^i$ — one-hot etykieta dla próbki $\underline{x}^i$
+$\underline{y}$ — one-hot etykieta dla próbki $\underline{x}$
 
-$\underline{z^i}$ — wektor logitów dla próbki $\underline{x}^i$
+$\underline{z}$ — wektor logitów dla próbki $\underline{x}$
 
-$p^i_j$ — prawdopodobieństwo przynależności próbki $\underline{x}^i$ do klasy $j$
+$p_i$ — prawdopodobieństwo przynależności próbki $\underline{x}$ do klasy $i$
 
-$$
-L = \sum_{i=1}^{n} \sum_{j=1}^{c} L^i_j
-$$
+Pochodną funkcji straty obliczam dla jednej próbki.
 
 $$
-L^i_j = -t^i_j \ln(p^i_j)
+L = \sum_{i=1}^{c} L_i
 $$
 
 $$
-\frac{\partial L^i_j}{\partial \underline{w}_k} = \frac{\partial L^i_j}{\partial p^i_j} \frac{\partial p^i_j}{\partial z^i_k} \frac{\partial z^i_k}{\partial \underline{w}_k}
-$$
-
-Pochodna $z^i_k$ po $\underline{w}_k$:
-
-$$
-\frac{\partial z^i_k}{\partial \underline{w}_k} = \frac{\partial}{\partial \underline{w}_k}(\underline{x}^i \underline{w}_k) = \underline{x}^i
-$$
-
-Pochodna $p^i_j$ po $z^i_k$:
-
-$$
-\frac{\partial p^i_j}{\partial z^i_k} = \frac{\partial}{\partial z^i_k}(\sigma(\underline{z^i})_j)
-$$
-
-Jeśli $j = k$:
-
-$$
-\frac{\partial p^i_j}{\partial z^i_k} = \sigma(\underline{z^i})_k (1 - \sigma(\underline{z^i})_k)
+L_i = -y_i \ln(p_i)
 $$
 
 $$
-= p^i_k(1 - p^i_k)
+\frac{\partial L_i}{\partial \underline{w}_j} = \frac{\partial L_i}{\partial p_i} \frac{\partial p_i}{\partial z_j} \frac{\partial z_j}{\partial \underline{w}_j}
 $$
 
-Jeśli $j \ne k$:
+Pochodna $z_j$ po $\underline{w}_j$:
 
 $$
-\frac{\partial p^i_j}{\partial z^i_k} = - \sigma(\underline{z}^i)_j \sigma(\underline{z}^i)_k
+\frac{\partial z_j}{\partial \underline{w}_j} = \frac{\partial}{\partial \underline{w}_j}(\underline{x} \underline{w}_j) = \underline{x}
+$$
+
+Pochodna $p_i$ po $z_j$:
+
+$$
+\frac{\partial p_i}{\partial z_j} = \frac{\partial}{\partial z_j}(\sigma(\underline{z})_i)
+$$
+
+Jeśli $i = j$:
+
+$$
+\frac{\partial p_i}{\partial z_j} = \sigma(\underline{z})_j (1 - \sigma(\underline{z})_j)
 $$
 
 $$
-= - p^i_j p^i_k
+= p_j(1 - p_j)
 $$
 
-Pochodna $L^i_j$ po $p^i_j$:
+Jeśli $i \ne j$:
 
 $$
-\frac{\partial L^i_j}{\partial p^i_j} = - \frac{t^i_j}{p^i_j}
+\frac{\partial p_i}{\partial z_j} = - \sigma(\underline{z})_i \sigma(\underline{z})_j
+$$
+
+$$
+= - p_i p_j
+$$
+
+Pochodna $L_i$ po $p_i$:
+
+$$
+\frac{\partial L_i}{\partial p_i} = - \frac{y_i}{p_i}
 $$
 
 Teraz pora policzyć wszystko razem dla dwóch różnych przypadków.
 
 $$
-\frac{\partial L^i_j}{\partial \underline{w}_k} = \frac{\partial L^i_j}{\partial p^i_j} \frac{\partial p^i_j}{\partial z^i_k} \frac{\partial z^i_k}{\partial \underline{w}_k}
+\frac{\partial L_i}{\partial \underline{w}_j} = \frac{\partial L_i}{\partial p_i} \frac{\partial p_i}{\partial z_j} \frac{\partial z_j}{\partial \underline{w}_j}
 $$
 
 $$
-= - \frac{t^i_j}{p^i_j} \frac{\partial p^i_j}{\partial z^i_k} \underline{x}^i
+= - \frac{y_i}{p_i} \frac{\partial p_i}{\partial z_j} \underline{x}
 $$
 
-Jeśli $j = k$:
+Jeśli $i = j$:
 
 $$
-\frac{\partial L^i_j}{\partial \underline{w}_k} = - \frac{t^i_k}{p^i_k} [p^i_k(1 - p^i_k)] \underline{x}^i
-$$
-
-$$
-= (t^i_k p^i_k - t^i_k)\underline{x}^i
-$$
-
-Jeśli $j \ne k$:
-
-$$
-\frac{\partial L^i_j}{\partial \underline{w}_k} = - \frac{t^i_j}{p^i_j} [-p^i_j p^i_k] \underline{x}^i
+\frac{\partial L_i}{\partial \underline{w}_j} = - \frac{y_j}{p_j} [p_j(1 - p_j)] \underline{x}
 $$
 
 $$
-= t^i_j p^i_k \underline{x}^i
+= (y_j p_j - y_j)\underline{x}
 $$
 
-Teraz sumujemy wszystko po klasach, żeby dostać pochodną $L^i$ po $\underline{w}_k$:
+Jeśli $i \ne j$:
 
 $$
-\frac{\partial L^i}{\partial \underline{w}_k} = (t^i_k p^i_k - t^i_k)\underline{x}^i + \sum_{\substack{j=1 \\ j \neq k}}^{c} (t^i_j p^i_k \underline{x}^i)
-$$
-
-$$
-= (t^i_k p^i_k - t^i_k)\underline{x}^i + p^i_k \underline{x}^i \sum_{\substack{j=1 \\ j \neq k}}^{c} t^i_j
+\frac{\partial L_i}{\partial \underline{w}_j} = - \frac{y_i}{p_i} [-p_i p_j] \underline{x}
 $$
 
 $$
-= (t^i_k p^i_k - t^i_k)\underline{x}^i + p^i_k \underline{x}^i (\sum_{j = 1}^{c} (t^i_j )- t^i_k)
+= y_i p_j \underline{x}
+$$
+
+Teraz sumujemy wszystko po klasach, żeby dostać pochodną $L$ po $\underline{w}_j$:
+
+$$
+\frac{\partial L}{\partial \underline{w}_j} = (y_j p_j - y_j)\underline{x} + \sum_{\substack{i=1 \\ i \neq j}}^{c} (y_i p_j \underline{x})
 $$
 
 $$
-= (t^i_k p^i_k - t^i_k)\underline{x}^i + p^i_k \underline{x}^i (1 - t^i_k)
+= (y_j p_j - y_j)\underline{x} + p_j \underline{x} \sum_{\substack{i=1 \\ i \neq j}}^{c} y_i
 $$
 
 $$
-= (t^i_k p^i_k - t^i_k + p^i_k - t^i_k p^i_k)\underline{x}^i
+= (y_j p_j - y_j)\underline{x} + p_j \underline{x} ((\sum_{i = 1}^{c} y_i )- y_j)
 $$
 
 $$
-= (p^i_k - t^i_k) \underline{x}^i
+= (y_j p_j - y_j)\underline{x} + p_j \underline{x} (1 - y_j)
+$$
+
+$$
+= (y_j p_j - y_j + p_j - y_j p_j)\underline{x}
+$$
+
+$$
+= (p_j - y_j) \underline{x}
+$$
+
+Metoda gradientu prostego:
+
+$$
+\Delta \underline{w}_j = - \eta \underline{x}^{\top} (p_j - y_j)
+$$
+
+Postać macierzowa (dla całego zbioru próbek):
+
+$$
+\Delta W = -\eta X^\top (P - Y) \\
+\tiny{(d, c) = (d, n)(n, c)}
 $$

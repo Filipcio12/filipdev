@@ -13,3 +13,10 @@ defaultContentLanguage = "pl"
     languageCode = "pl"
     contentDir = "content/pl"
     title = "Blog Filipa Fajfera"
+  
+[markup.goldmark.extensions.passthrough]
+  enable = true
+
+[markup.goldmark.extensions.passthrough.delimiters]
+  block = [['\[', '\]'], ['$$', '$$']]
+  inline = [['$', '$'], ['\(', '\)']]

@@ -64,7 +64,11 @@ $$
 Funkcja logitowa to odwrotność funkcji sigmoidalnej. Tym określeniem nazywamy też surowe predykcje modeli w uczeniu maszynowym przed zastosowaniem funkcji aktywacyjnej.
 
 $$
-\mathrm{logit}(p) = \ln \frac{p}{1 - p} = \ln(p) - \ln(1 - p)
+\mathrm{logit}(p) = \ln \frac{p}{1 - p} 
+$$
+
+$$
+= \ln(p) - \ln(1 - p)
 $$
 
 ### Dowód odwrotności

@@ -7,57 +7,6 @@ Prezentuję tutaj moje wyprowadzenie wzorów związanych z regresją liniową.
 
 <!--more-->
 
-## Mnożenie macierzy
-
-$$
-A = \begin{bmatrix}
-a_{1 1} & a_{1 2} & \cdots & a_{1 n} \\
-a_{2 1} & a_{2 2} & \cdots & a_{2 n} \\
-\vdots  & \vdots  & \ddots & \vdots  \\
-a_{p 1} & a_{p 2} & \cdots & a_{p n}
-\end{bmatrix}
-$$
-
-$$
-B = \begin{bmatrix}
-b_{1 1} & b_{1 2} & \cdots & b_{1 m} \\
-b_{2 1} & b_{2 2} & \cdots & b_{2 m} \\
-\vdots  & \vdots  & \ddots & \vdots  \\
-b_{n 1} & b_{n 2} & \cdots & b_{n m}
-\end{bmatrix}
-$$
-
-$$
-C = AB = \begin{bmatrix}
-c_{1 1} & c_{1 2} & \cdots & c_{1 m} \\
-c_{2 1} & c_{2 2} & \cdots & c_{2 m} \\
-\vdots  & \vdots  & \ddots & \vdots  \\
-c_{p 1} & c_{p 2} & \cdots & c_{p m}
-\end{bmatrix}
-$$
-
-$$
-c_{i j} = a_{i 1} b_{1 j} + a_{i 2} b_{2 j} + \ldots + a_{i n} b_{n j}
-$$
-
-Macierze można mnożyć jeśli są o wymiarach $(p, n) (n, m)$. Wtedy wynik ma wymiary $(p, m)$. Czyli środkowe wymiary muszą być równe i w wyniku się zjadają.
-
-Za pomocą indeksu górnego numeruję wiersze a dolnego — kolumny.
-
-## Odwracanie macierzy
-
-## Macierz jednostkowa
-
-$$
-I_n = \begin{bmatrix}
-1 & 0 & 0 & \cdots & 0 \\
-0 & 1 & 0 & \cdots & 0 \\
-0 & 0 & 1 & \cdots & 0 \\
-\vdots & \vdots & \vdots & \ddots & \vdots  \\
-0 & 0 & 0 & \cdots & 1 \\
-\end{bmatrix}
-$$
-
 ## Pochodne
 
 $$
@@ -90,7 +39,7 @@ x_{n 1} & x_{n 2} & \cdots & x_{n d}
 $$
 
 $$
-\underline{y} = [y_1, y_2, \ldots, y_n]^\top
+\mathbf{y} = [y_1, y_2, \ldots, y_n]^\top
 $$
 
 $X$ — macierz próbek o wymiarach $(n, d)$
@@ -99,29 +48,29 @@ $n$ — liczba próbek
 
 $d$ — liczba cech w próbce
 
-$\underline{y}$ — wektor wartości docelowych o wymiarach $(n, 1)$
+$\mathbf{y}$ — wektor wartości docelowych o wymiarach $(n, 1)$
 
-Dla nieznanej próbki $\underline{x}$ chcielibyśmy przewidzieć wartość $\hat{y}$, która najlepiej pasuje do pozostałych próbek.
+Dla nieznanej próbki $\mathbf{x}$ chcielibyśmy przewidzieć wartość $\hat{y}$, która najlepiej pasuje do pozostałych próbek.
 
 $$
 \hat{y} = w_1 x_1 + w_2 x_2 + \ldots + w_d x_d
 $$
 
 $$
-\underline{x} = [x_1, x_2, \ldots, x_d]
+\mathbf{x} = [x_1, x_2, \ldots, x_d]
 $$
 
-$$\underline{w} = [w_1, w_2, \ldots, w_d]^\top$$
+$$\mathbf{w} = [w_1, w_2, \ldots, w_d]^\top$$
 
 $$
-\hat{y} = \underline{x} \underline{w} \\
+\hat{y} = \mathbf{x} \mathbf{w} \\
 {\tiny (1, 1) = (1, d) (d, 1)}
 $$
 
-Wtedy wektor predykcji $\underline{\hat{y}}$ można zdefiniować następująco:
+Wtedy wektor predykcji $\mathbf{\hat{y}}$ można zdefiniować następująco:
 
 $$
-\underline{\hat{y}} = X \underline{w}
+\mathbf{\hat{y}} = X \mathbf{w}
 $$
 
 Następnie należy ustalić funkcję straty.
@@ -131,50 +80,50 @@ L = \frac{1}{2} \sum_{i=1}^{n} (\hat{y}_i - y_i)^2
 $$
 
 $$
-L = \frac{1}{2}[\underline{\hat{y}} - \underline{y}]^\top [\underline{\hat{y}} - \underline{y}]
+L = \frac{1}{2}[\mathbf{\hat{y}} - \mathbf{y}]^\top [\mathbf{\hat{y}} - \mathbf{y}]
 $$
 
 $$
-L = \frac{1}{2}[X \underline{w} - \underline{y}]^\top [X \underline{w} - \underline{y}] \\
+L = \frac{1}{2}[X \mathbf{w} - \mathbf{y}]^\top [X \mathbf{w} - \mathbf{y}] \\
 {\tiny (1, 1) = (1, n) (n, 1)}
 $$
 
-Zarówno współczynnik $\frac{1}{2}$, jak i podnoszenie różnicy między predykcją a wartością docelową jest po to, żeby ułatwić liczenie pochodnej.
+Zarówno współczynnik $\frac{1}{2}$, jak i podnoszenie różnicy między predykcją a wartością docelową do kwadratu jest po to, żeby ułatwić liczenie pochodnej.
 
 $$
-\frac{\partial L}{\partial \underline{w}} = \frac{1}{2} \cdot 2 \cdot (\frac{\partial}{\partial \underline{w}}[X \underline{w} - \underline{y}])^\top [X \underline{w} - \underline{y}]
-$$
-
-$$
-\frac{\partial L}{\partial \underline{w}} = X^\top [X \underline{w} - \underline{y}]
+\frac{\partial L}{\partial \mathbf{w}} = \frac{1}{2} \cdot 2 \cdot (\frac{\partial}{\partial \mathbf{w}}[X \mathbf{w} - \mathbf{y}])^\top [X \mathbf{w} - \mathbf{y}]
 $$
 
 $$
-X^\top X \underline{w} - X^\top \underline{y} = 0
+\frac{\partial L}{\partial \mathbf{w}} = X^\top [X \mathbf{w} - \mathbf{y}]
 $$
 
 $$
-\underline{w} = (X^\top X)^{-1} X^\top \underline{y}
+X^\top X \mathbf{w} - X^\top \mathbf{y} = 0
+$$
+
+$$
+\mathbf{w} = (X^\top X)^{-1} X^\top \mathbf{y}
 $$
 
 Metoda gradientu prostego
 
 $$
-\Delta \underline{w} = - \eta \frac{\partial L}{\partial \underline{w}}
+\Delta \mathbf{w} = - \eta \frac{\partial L}{\partial \mathbf{w}}
 $$
 
 $$
-\Delta \underline{w} = - \eta X^\top [X \underline{w} - \underline{y}]
+\Delta \mathbf{w} = - \eta X^\top [X \mathbf{w} - \mathbf{y}]
 $$
 
 $$
-\Delta \underline{w} = - \eta X^\top [\underline{\hat{y}} - \underline{y}]
+\Delta \mathbf{w} = - \eta X^\top [\mathbf{\hat{y}} - \mathbf{y}]
 $$
 
 Odejmuję wartość docelową od predykcji, ponieważ jeśli predykcja jest większa od wartości docelowej, to należy obniżyć wagę. Mogę równie dobrze odwrócić te wartości.
 
 $$
-\Delta \underline{w} = \eta X^\top [\underline{y} - \underline{\hat{y}}]
+\Delta \mathbf{w} = \eta X^\top [\mathbf{y} - \mathbf{\hat{y}}]
 $$
 
 Teraz jeśli predykcja jest większa, to wartość $\Delta$ jest już ujemna, więc nie potrzeba minusa na początku.
@@ -184,57 +133,57 @@ Zarówno odejmowanie gradientu od wag, jak i liczenie funkcji straty, a nie korz
 ## Regularyzacja L2
 
 $$
-\|\underline{w}\|_2 = \sqrt{(w_1)^2 + (w_2)^2 + \ldots + (w_d)^2}
+\|\mathbf{w}\|_2 = \sqrt{(w_1)^2 + (w_2)^2 + \ldots + (w_d)^2}
 $$
 
 $$
-\|\underline{w}\|_2^2 = (w_1)^2 + (w_2)^2 + \ldots + (w_d)^2
+\|\mathbf{w}\|_2^2 = (w_1)^2 + (w_2)^2 + \ldots + (w_d)^2
 $$
 
 $$
-\|\underline{w}\|_2^2 = \underline{w}^\top \underline{w}
+\|\mathbf{w}\|_2^2 = \mathbf{w}^\top \mathbf{w}
 $$
 
 $$
-L = \frac{1}{2}([X \underline{w} - \underline{y}]^\top [X \underline{w} - \underline{y}] + \lambda \underline{w}^\top \underline{w})
+L = \frac{1}{2}([X \mathbf{w} - \mathbf{y}]^\top [X \mathbf{w} - \mathbf{y}] + \lambda \mathbf{w}^\top \mathbf{w})
 $$
 
 $$
-\frac{\partial L}{\partial \underline{w}} = \frac{1}{2}(2 \cdot [X^\top X \underline{w} - X^\top \underline{y}] + 2 \cdot \lambda \underline{w})
+\frac{\partial L}{\partial \mathbf{w}} = \frac{1}{2}(2 \cdot [X^\top X \mathbf{w} - X^\top \mathbf{y}] + 2 \cdot \lambda \mathbf{w})
 $$
 
 $$
-X^\top X \underline{w} - X^\top \underline{y} + \lambda \underline{w} = 0
+X^\top X \mathbf{w} - X^\top \mathbf{y} + \lambda \mathbf{w} = 0
 $$
 
 Żeby dodać współczynnik regularyzacji $\lambda$ do macierzy kwadratowej, korzystamy z macierzy jednostkowej $I$.
 
 $$
-(X^\top X + \lambda I) \underline{w} = X^\top \underline{y}
+(X^\top X + \lambda I) \mathbf{w} = X^\top \mathbf{y}
 $$
 
 $$
-\underline{w} = (X^\top X + \lambda I)^{-1} X^\top \underline{y}
+\mathbf{w} = (X^\top X + \lambda I)^{-1} X^\top \mathbf{y}
 $$
 
 Metoda gradientu prostego
 
 $$
-\Delta \underline{w} = - \eta \frac{\partial L}{\partial \underline{w}}
+\Delta \mathbf{w} = - \eta \frac{\partial L}{\partial \mathbf{w}}
 $$
 
 $$
-\Delta \underline{w} = - \eta X^\top [\underline{\hat{y}} - \underline{y}] + \lambda \underline{w}
+\Delta \mathbf{w} = - \eta (X^\top [\mathbf{\hat{y}} - \mathbf{y}] + \lambda \mathbf{w})
 $$
 
 ## Regularyzacja L1
 
 $$
-\|\underline{w}\|_1 = |w^1|+ |w^2|+ \ldots + |w^d|
+\|\mathbf{w}\|_1 = |w_1|+ |w_2|+ \ldots + |w_d|
 $$
 
 $$
-\Delta \underline{w} = - \eta X^\top [\underline{\hat{y}} - \underline{y}] + \lambda \frac{\partial}{\partial \underline{w}} (\|\underline{w}\|_1)
+\Delta \mathbf{w} = - \eta (X^\top [\mathbf{\hat{y}} - \mathbf{y}] + \lambda\,\mathrm{sign}(\mathbf{w}))
 $$
 
 Ponieważ nie ma wygodnej pochodnej dla wartości absolutnej, to stosujemy jedynie metodę gradientu prostego.
@@ -242,7 +191,7 @@ Ponieważ nie ma wygodnej pochodnej dla wartości absolutnej, to stosujemy jedyn
 ## Cechy wielomianowe
 
 $$
-\underline{x} = [x_1, x_2, \ldots, x_d]
+\mathbf{x} = [x_1, x_2, \ldots, x_d]
 $$
 
 Transformacja ta tworzy wektor wszystkich kombinacji wielomianów, tj. poniżej:

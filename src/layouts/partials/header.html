@@ -4,16 +4,16 @@
     <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
     <ul class="nav-links">
       <li>
-        <a href="{{ relLangURL "/" }}">{{ i18n "home" }}</a>
+        <a href="{{ .Site.Home.RelPermalink }}">{{ i18n "home" }}</a>
       </li>
       <li>
-        <a href="{{ relLangURL "/about" }}">{{ i18n "about" }}</a>
+        <a href="{{ relLangURL "about/" }}">{{ i18n "about" }}</a>
       </li>
       <li>
-        <a href="{{ relLangURL "/projects" }}">{{ i18n "projects" }}</a>
+        <a href="{{ relLangURL "projects/" }}">{{ i18n "projects" }}</a>
       </li>
       <li>
-        <a href="{{ relLangURL "/posts" }}">{{ i18n "posts" }}</a>
+        <a href="{{ relLangURL "posts/" }}">{{ i18n "posts" }}</a>
       </li>
     </ul>
     <div class="nav-controls">

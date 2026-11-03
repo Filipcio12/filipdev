@@ -25,7 +25,7 @@ $$
 
 Przykład: $\underline{x} = [-5,\, 5,\, 3,\, 4,\, 2,\, -3]$
 
-![Arithmetic mean](/posts/normal-distribution/arithmetic_mean.png)
+![Arithmetic mean](arithmetic_mean.png)
 
 Jeśli przesuniemy wszystkie punkty w dół o wartość średniej arytmetycznej, to wtedy $\mu = 0$ i dane są scentrowane.
 
@@ -83,7 +83,7 @@ Jeżeli wartość próbek zależy od wielu różnych czynników, to rozkład pra
 
 ### Funkcja Gaussa
 
-![Gaussian function](/posts/normal-distribution/gaussian_function.png)
+![Gaussian function](gaussian_function.png)
 
 $$
 f(x) = e^{-x^2}

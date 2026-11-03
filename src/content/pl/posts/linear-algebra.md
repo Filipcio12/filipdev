@@ -11,7 +11,7 @@ W tym wpisie przedstawiam podstawy algebry liniowej.
 
 Wektor opisuje położenie punktu w przestrzeni albo przesunięcie punktu w przestrzeni. Jeżeli do wektora $\underline{a}$ dodamy wektor $\underline{b}$, to jakbyśmy się przesuneli z punktu $a$ o wektor $\underline{b}$ do punktu $a +\underline{b}$.
 
-{{< figure src="/posts/linear-algebra/vector.png" width="300px" >}}
+{{< figure src="vector.png" width="300px" >}}
 
 Każdy wektor można opisać jako sumę wektorów jednostkowych zgodnych z osiami układu współrzędnych.
 
@@ -45,7 +45,7 @@ $$
 
 ## Iloczyn skalarny
 
-{{< figure src="/posts/linear-algebra/dot_product.png" width="400px" >}}
+{{< figure src="dot_product.png" width="400px" >}}
 
 $$
 \alpha = \theta + \beta
@@ -462,7 +462,7 @@ Macierz efektywnie opisuje przekształcenie liniowe. Każda kolumna macierzy zaw
 
 Jeżeli mamy przestrzeń trójwymiarową i chcemy obrócić wektor wokół osi $y$, czyli w ramach płaszczyzny $xz$ o jakiś kąt $\theta$, to wystarczy rozpatrzeć, gdzie będzie wskazywał wektor jednostkowy $\hat{\imath}$, $\hat{\jmath}$ i $\hat{k}$ po tym przekształceniu.
 
-{{< figure src="/posts/linear-algebra/rotation.png" width="400px" >}}
+{{< figure src="rotation.png" width="400px" >}}
 
 $$
 \hat{\imath} = [\cos \theta, 0, \sin \theta]

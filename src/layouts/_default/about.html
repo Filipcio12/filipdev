@@ -1,17 +1,17 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
-  <img src="/picture-of-me.jpg" alt="Picture of me!" id="picture-of-me" />
+  <img src="{{ "picture-of-me.jpg" | relURL }}" alt="Picture of me!" id="picture-of-me" />
   {{ .Content }}
   <div class="logo-container">
-    <img src="/gmail.svg" class="logo" alt="Gmail logo"/>
-    filipfajfer2@gmail.com
+    <img src="{{ "gmail.svg" | relURL }}" class="logo" alt="Gmail logo"/>
+    filipfajfer5@gmail.com
   </div>
   <div class="logo-container">
-    <img src="/github.svg" class="logo" alt="Github logo"/>
+    <img src="{{ "github.svg" | relURL }}" class="logo" alt="Github logo"/>
     <a href="https://github.com/Filipcio12/">Filipcio12</a>
   </div>
   <div class="logo-container">
-    <img src="/buymeacoffee.svg" class="logo" alt="Buymeacoffee logo"/>
+    <img src="{{ "buymeacoffee.svg" | relURL }}" class="logo" alt="Buymeacoffee logo"/>
     <a href="https://buymeacoffee.com/filipdev">Buy me a coffee!</a>
   </div>
   {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}

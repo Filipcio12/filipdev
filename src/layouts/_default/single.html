@@ -7,7 +7,7 @@
 
   {{ .Content }}
   <div class="logo-container">
-    <img src="/buymeacoffee.svg" class="logo" alt="Buymeacoffee logo"/>
+    <img src="{{ "buymeacoffee.svg" | relURL }}" class="logo" alt="Buymeacoffee logo"/>
     <a href="https://buymeacoffee.com/filipdev">Buy me a coffee!</a>
   </div>
   {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}

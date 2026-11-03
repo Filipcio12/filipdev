@@ -9,7 +9,7 @@ Prezentuję tutaj moje wyprowadzenie wzorów związanych z maszyną wektorów no
 
 ## Odległość punktu od płaszczyzny
 
-![Point from plane](/posts/svm/point_from_plane.png)
+![Point from plane](point_from_plane.png)
 
 $$
 \pi: ax + by + cz + d = 0
@@ -101,7 +101,7 @@ $$
 \mathrm{dist}(\underline{x}_i) = y_i \frac{\underline{x}_i\underline{w}}{||\underline{w}||}
 $$
 
-![Margin](/posts/svm/margin.png)
+![Margin](margin.png)
 
 Celem SVM-a jest stworzenie największego możliwie marginesu między powierzchnią decyzyjną a najbliższymi do niej próbkami.
 

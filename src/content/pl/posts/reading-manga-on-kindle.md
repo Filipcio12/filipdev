@@ -17,19 +17,19 @@ Calibre można pobrać ze strony internetowej: https://calibre-ebook.com/. Dla p
 
 Instaluję wtyczkę **EpubMerge** bezpośrednio z Calibre. Po otworzeniu programu najpierw klikam strzałeczkę w dół na prawo od **Preferences**, a następnie **Get plugins to enhance calibre**. W okienku do wyszukiwania wpisuję EpubMerge i pojawia się wtyczka autorstwa Jima Millera. Klikam wtyczkę dwa razy i instaluję.
 
-![Wtyczka EpubMerge Jima Millera](/posts/reading-manga-on-kindle/epub_merge.png)
+![Wtyczka EpubMerge Jima Millera](epub_merge.png)
 
 Następnie naciskam małą strzałeczkę obok **Add books** po lewej i wybieram **Add from folders and subfolders**.
 
-![Okienko dialogowe](/posts/reading-manga-on-kindle/add_books_from_folders_and_subfolders_dialog.png)
+![Okienko dialogowe](add_books_from_folders_and_subfolders_dialog.png)
 
 Wybieram **No**, ponieważ każdy plik odpowiada innemu rozdziałowi i zaznaczam wymieniony wyżej katalog. Po wczytaniu wszystkich plików, sortuję książki po tytule, aby później je scalić w odpowiedniej kolejności. Ponieważ nazwy rozdziałów są ponumerowane, to poprawnie się sortują. Następnie zaznaczam wszystkie rozdziały i klikam strzałeczkę obok **EpubMerge** a potem **Merge Epubs**. W okienku usuwam opis, który zawiera tytuły wszystkich scalonych plików, zmieniam tytuł oraz autora oraz ustawiam zdjęcie okładki.
 
-![Okienko scalowania](/posts/reading-manga-on-kindle/merge_dialog.png)
+![Okienko scalowania](merge_dialog.png)
 
 Po scalowaniu usuwam pojedyncze rozdziały, ponieważ nie będą mi już potrzebne (zostają one usunięte z **Calibre Library**, więc wciąż istnieją w moim katalogu ~/Documents/Mangas/Vagabond/). Ostatnie co trzeba zrobić, to przekonwertować plik EPUB na AZW3, żeby to zrobić, wystarczy zaznaczyć książkę, a następnie kliknąć **Convert books**. Otworzy się okienko, gdzie po lewej będzie można wybrać input format (EPUB) a po prawej output format (AZW3). Klikam **Ok** i konwertuję.
 
-![Okienko konwertowania](/posts/reading-manga-on-kindle/convert_vagabond.png)
+![Okienko konwertowania](convert_vagabond.png)
 
 Na koniec należy podłączyć Kindle do laptopa za pomocą USB. Calibre automatycznie wykryje czytnik. Wybieram książkę, a potem klikam **Send to device**. Czekam, aż pliki nie zostaną przesłane i tyle.
 

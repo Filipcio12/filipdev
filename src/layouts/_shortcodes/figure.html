@@ -1,0 +1,18 @@
+{{- $src := .Get "src" -}}
+{{- if not (or (urls.Parse $src).IsAbs (strings.HasPrefix $src "/")) -}}
+  {{- $pagePath := strings.TrimPrefix .Page.Site.Home.RelPermalink .Page.RelPermalink -}}
+  {{- $src = printf "%s%s" $pagePath $src | relURL -}}
+{{- end -}}
+
+<figure{{ with .Get "class" }} class="{{ . }}"{{ end }}>
+  <img src="{{ $src }}"
+    alt="{{ .Get "alt" }}"
+    {{ with .Get "width" }}width="{{ . }}"{{ end }}
+    {{ with .Get "height" }}height="{{ . }}"{{ end }}>
+  {{ if or (.Get "title") (.Get "caption") }}
+    <figcaption>
+      {{ with .Get "title" }}<h4>{{ . }}</h4>{{ end }}
+      {{ with .Get "caption" }}{{ . | markdownify }}{{ end }}
+    </figcaption>
+  {{ end }}
+</figure>

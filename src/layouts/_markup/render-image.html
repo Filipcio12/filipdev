@@ -1,0 +1,8 @@
+{{- $src := .Destination -}}
+{{- if not (or (urls.Parse $src).IsAbs (strings.HasPrefix $src "/")) -}}
+  {{- $pagePath := strings.TrimPrefix .Page.Site.Home.RelPermalink .Page.RelPermalink -}}
+  {{- $src = printf "%s%s" $pagePath $src | relURL -}}
+{{- end -}}
+
+<img src="{{ $src }}" alt="{{ .PlainText }}"
+  {{ with .Title }}title="{{ . }}"{{ end }}>

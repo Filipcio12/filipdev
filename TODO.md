@@ -5,7 +5,6 @@ Tasks:
 - Translate remaining articles to English.
 - Add tags (ML, Linux, poetry, thoughts, gamedev).
 - Change the home page and about me text to be more job friendly.
-- Change the repo name and the username on Github.
 
 Post ideas:
 

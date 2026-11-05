@@ -2,7 +2,7 @@
 
 Tasks:
 
-- Translate remaining articles to English.
+- Make a custom scrollbar.
 - Add tags (ML, Linux, poetry, thoughts, gamedev).
 - Change the home page and about me text to be more job friendly.
 

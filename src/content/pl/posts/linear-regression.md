@@ -3,23 +3,23 @@ title = 'Regresja liniowa'
 date = 2026-04-04T11:47:43+02:00
 +++
 
-Prezentuję tutaj moje wyprowadzenie wzorów związanych z regresją liniową.
+W tym artykule przedstawiam matematyczne wyprowadzenie regresji liniowej oparte na minimalizacji błędu średniokwadratowego (MSE). Omawiam rozwiązanie analityczne oraz numeryczne, a także wpływ regularyzacji na wyznaczane parametry.
 
 <!--more-->
 
 ## Pochodne
 
+Pochodna wielomianu:
+
 $$
 \frac{d}{dx} x^r = r x^{r - 1}
 $$
 
-pochodna wielomianu
+Pochodna funkcji złożonej:
 
 $$
 \frac{d}{dx} f(g(x)) = \frac{df}{dg} \frac{dg}{dx}
 $$
-
-pochodna funkcji złożonej
 
 ### Przykład
 
@@ -194,7 +194,7 @@ $$
 \mathbf{x} = [x_1, x_2, \ldots, x_d]
 $$
 
-Transformacja ta tworzy wektor wszystkich kombinacji wielomianów, tj. poniżej:
+Transformacja ta tworzy wektor wszystkich kombinacji jednomianów, tj. poniżej:
 
 $$
 (x_1)^{p_1} (x_2)^{p_2} \ldots (x_d)^{p_d}
@@ -212,7 +212,7 @@ $$
 
 Ewidentnie jest tutaj $10$ kombinacji.
 
-Każdy z tych wielomianów można również przedstawić następująco:
+Każdy z tych jednomianów można również przedstawić następująco:
 
 $$
 | \ | \ \ast \ \ast \ \ast  \\

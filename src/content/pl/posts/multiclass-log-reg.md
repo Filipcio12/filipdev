@@ -3,7 +3,7 @@ title = 'Wieloklasowa regresja logistyczna'
 date = 2026-04-07T13:49:31+02:00
 +++
 
-Prezentuję tutaj moje wyprowadzenie wzorów związanych z wieloklasową regresją logistyczną.
+W tym artykule przedstawiam rozszerzenie regresji logistycznej na problemy wieloklasowe. Polega ono na przekształceniu surowych wyników liniowych (tzw. logitów) w unormowany rozkład prawdopodobieństwa za pomocą funkcji softmax, a następnie na ocenie błędu modelu przy użyciu funkcji straty entropii krzyżowej.
 
 <!--more-->
 
@@ -12,45 +12,45 @@ Prezentuję tutaj moje wyprowadzenie wzorów związanych z wieloklasową regresj
 Softmax to generalizacja sigmoida dla więcej niż dwóch klas albo raczej na odwrót; sigmoid jest szczególnym przypadkiem funkcji softmax.
 
 $$
-\sigma(\underline{z})_i = \frac{e^{z_i}}{\sum_{j=1}^{c} e^{z_j}} = p_i
+\sigma(\mathbf{z})_i = \frac{e^{z_i}}{\sum_{j=1}^{c} e^{z_j}} = p_i
 $$
 
 $$
-\sigma(\underline{z}) = \underline{p}
+\sigma(\mathbf{z}) = \mathbf{p}
 $$
 
 Softmax zwraca wektor i we wzorze indeksujemy ten wektor.
 
 $$
-\underline{z} = [z_1, z_2, \ldots, z_c]
+\mathbf{z} = [z_1, z_2, \ldots, z_c]
 $$
 
 $$
-\underline{p} = [p_1, p_2, \ldots, p_c]
+\mathbf{p} = [p_1, p_2, \ldots, p_c]
 $$
 
-$\underline{z}$ — wektor $c$-elementowy logitów
+$\mathbf{z}$ — wektor $c$-elementowy logitów
 
-$\underline{p}$ — wektor $c$-elementowy prawdopodobieństw
+$\mathbf{p}$ — wektor $c$-elementowy prawdopodobieństw
 
 ### Sigmoid to softmax dla klasy $1$ i $c = 2$
 
-Jeśli $\underline{z} = [z_1, z_2]$:
+Jeśli $\mathbf{z} = [z_1, z_2]$:
 
 $$
-\sigma(\underline{z})_1 = \frac{e^{z_1}}{e^{z_1} + e^{z_2}}
+\sigma(\mathbf{z})_1 = \frac{e^{z_1}}{e^{z_1} + e^{z_2}}
 $$
 
 Dzielimy licznik i mianownik przez $e^{z_1}$.
 
 $$
-\sigma(\underline{z})_1 = \frac{1}{1 + e^{z_2 - z_1}}
+\sigma(\mathbf{z})_1 = \frac{1}{1 + e^{z_2 - z_1}}
 $$
 
 Dla $z = z_1 - z_2$:
 
 $$
-\sigma(\underline{z})_1 = \frac{1}{1 + e^{-z}}
+\sigma(\mathbf{z})_1 = \frac{1}{1 + e^{-z}}
 $$
 
 ### Pochodna
@@ -58,7 +58,7 @@ $$
 Ponieważ softmax to funkcja przyjmująca wektor i zwracająca wektor, to pochodną tej funkcji jest macierz Jacobiego.
 
 $$
-\frac{\partial \sigma}{\partial \underline{z}} = J
+\frac{\partial \sigma}{\partial \mathbf{z}} = J
 $$
 
 $$
@@ -92,8 +92,6 @@ $$
 $$
 = e^{z_j}
 $$
-
-Tutaj musimy użyć inną zmienną (w tym przypadku $k$) do iteracji sumy, ponieważ licząc pochodną po $z_j$, chcemy policzyć pochodną po $j$-tym elemencie wektora $\underline{z}$, a nie po wszystkich elementach.
 
 Kiedy $i = j$ (na przekątnej):
 
@@ -217,22 +215,22 @@ $Y$ — macierz one-hot etykiet o wymiarach $(n, c)$
 $n$ — liczba próbek
 
 $$
-\underline{y} = [0, 0, \ldots, 1, \ldots, 0]
+\mathbf{y} = [0, 0, \ldots, 1, \ldots, 0]
 $$
 
 $$
-\underline{z} = \underline{x} W
+\mathbf{z} = \mathbf{x} W
 $$
 
 $$
-p_i = \sigma(\underline{z})_i
+p_i = \sigma(\mathbf{z})_i
 $$
 
-$\underline{y}$ — one-hot etykieta dla próbki $\underline{x}$
+$\mathbf{y}$ — one-hot etykieta dla próbki $\mathbf{x}$
 
-$\underline{z}$ — wektor logitów dla próbki $\underline{x}$
+$\mathbf{z}$ — wektor logitów dla próbki $\mathbf{x}$
 
-$p_i$ — prawdopodobieństwo przynależności próbki $\underline{x}$ do klasy $i$
+$p_i$ — prawdopodobieństwo przynależności próbki $\mathbf{x}$ do klasy $i$
 
 Pochodną funkcji straty obliczam dla jednej próbki.
 
@@ -245,13 +243,13 @@ L_i = -y_i \ln(p_i)
 $$
 
 $$
-\frac{\partial L_i}{\partial \underline{w}_j} = \frac{\partial L_i}{\partial p_i} \frac{\partial p_i}{\partial z_j} \frac{\partial z_j}{\partial \underline{w}_j}
+\frac{\partial L_i}{\partial \mathbf{w}_j} = \frac{\partial L_i}{\partial p_i} \frac{\partial p_i}{\partial z_j} \frac{\partial z_j}{\partial \mathbf{w}_j}
 $$
 
-Pochodna $z_j$ po $\underline{w}_j$:
+Pochodna $z_j$ po $\mathbf{w}_j$:
 
 $$
-\frac{\partial z_j}{\partial \underline{w}_j} = \frac{\partial}{\partial \underline{w}_j}(\underline{x} \underline{w}_j) = \underline{x}
+\frac{\partial z_j}{\partial \mathbf{w}_j} = \frac{\partial}{\partial \mathbf{w}_j}(\mathbf{x} \mathbf{w}_j) = \mathbf{x}
 $$
 
 Pochodna $p_i$ po $z_j$:
@@ -266,40 +264,40 @@ $$
 \frac{\partial L_i}{\partial p_i} = - \frac{y_i}{p_i}
 $$
 
-Pochodna $L_i$ po $w_j$:
+Pochodna $L_i$ po $\mathbf{w}_j$:
 
 $$
-\frac{\partial L_i}{\partial \underline{w}_j} = \frac{\partial L_i}{\partial p_i} \frac{\partial p_i}{\partial z_j} \frac{\partial z_j}{\partial \underline{w}_j}
-$$
-
-$$
-= - \frac{y_i}{p_i} (p_i (\delta_{ij} - p_j)) \underline{x}
+\frac{\partial L_i}{\partial \mathbf{w}_j} = \frac{\partial L_i}{\partial p_i} \frac{\partial p_i}{\partial z_j} \frac{\partial z_j}{\partial \mathbf{w}_j}
 $$
 
 $$
-= (p_j y_i - y_j \delta_{ij}) \underline{x}
-$$
-
-Pochodna $L$ po $w_j$:
-
-$$
-\frac{\partial L}{\partial \underline{w}_j} = \sum_{i=1}^{c} (p_j y_i - y_j \delta_{ij}) \underline{x}
+= - \frac{y_i}{p_i} (p_i (\delta_{ij} - p_j)) \mathbf{x}
 $$
 
 $$
-= \left[p_j \sum_{i=1}^{c} y_i - y_j \sum_{i=1}^{c} \delta_{ij} \right] \underline{x}
+= (p_j y_i - y_j \delta_{ij}) \mathbf{x}
+$$
+
+Pochodna $L$ po $\mathbf{w}_j$:
+
+$$
+\frac{\partial L}{\partial \mathbf{w}_j} = \sum_{i=1}^{c} (p_j y_i - y_j \delta_{ij}) \mathbf{x}
 $$
 
 $$
-= (p_j - y_j) \underline{x}
+= \left[p_j \sum_{i=1}^{c} y_i - y_j \sum_{i=1}^{c} \delta_{ij} \right] \mathbf{x}
 $$
 
-Ponieważ $\underline{y}$ jest one-hot, to suma jego elementów jest równa $1$. Natomiast $\delta_{ij}$ jest równa jeden tylko dla $i = j$, ale dla reszty jest równa $0$, więc ta suma również musi być równa $1$.
+$$
+= (p_j - y_j) \mathbf{x}
+$$
+
+Ponieważ $\mathbf{y}$ jest one-hot, to suma jego elementów jest równa $1$. Natomiast $\delta_{ij}$ jest równa jeden tylko dla $i = j$, ale dla reszty jest równa $0$, więc ta suma również musi być równa $1$.
 
 Metoda gradientu prostego:
 
 $$
-\Delta \underline{w}_j = - \eta \underline{x}^{\top} (p_j - y_j)
+\Delta \mathbf{w}_j = - \eta \mathbf{x}^{\top} (p_j - y_j)
 $$
 
 Postać macierzowa (dla całego zbioru próbek):

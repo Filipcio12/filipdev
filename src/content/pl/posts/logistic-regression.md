@@ -3,7 +3,7 @@ title = 'Binarna regresja logistyczna'
 date = 2026-04-04T23:03:40+02:00
 +++
 
-Prezentuję tutaj moje wyprowadzenie wzorów związanych z binarną regresją logistyczną.
+W tym artykule przedstawiam funkcję sigmoidalną oraz wyprowadzam wzory dla dwóch funkcji straty: błędu średniokwadratowego (MSE) oraz binarnej entropii krzyżowej (BCE). Omówienie to obejmuje przekształcenie surowego wyniku liniowego w prawdopodobieństwo za pomocą funkcji sigmoid, a następnie wyznaczenie gradientów obu funkcji straty względem wag modelu.
 
 <!--more-->
 
@@ -15,7 +15,7 @@ $$
 \frac{d}{dx} \ln(x) = \frac{1}{x}
 $$
 
-Pochodna logarytmu o podstawie a:
+Pochodna logarytmu o podstawie $a$:
 
 $$
 \frac{d}{dx} \log _a (x) = \frac{d}{dx} \left[\frac{\ln(x)}{\ln(a)}\right]
@@ -61,7 +61,7 @@ $$
 
 ## Logit
 
-Funkcja logitowa to odwrotność funkcji sigmoidalnej. Tym określeniem nazywamy też surowe predykcje modeli w uczeniu maszynowym przed zastosowaniem funkcji aktywacyjnej.
+Funkcja logitowa to odwrotność funkcji sigmoidalnej. „Logitami” nazywamy też surowe predykcje modeli w uczeniu maszynowym przed zastosowaniem funkcji aktywacyjnej.
 
 $$
 \mathrm{logit}(p) = \ln \frac{p}{1 - p} 
@@ -96,32 +96,32 @@ y \in \{0, 1\}
 $$
 
 $$
-z = \underline{x} \underline{w}
+z = \mathbf{x} \mathbf{w}
 $$
 
 $$
 p = \sigma(z)
 $$
 
-$y$ — etykieta próbki $\underline{x}$
+$y$ — etykieta próbki $\mathbf{x}$
 
-$z$ — logit próbki $\underline{x}$
+$z$ — logit próbki $\mathbf{x}$
 
-$p$ — prawdopodobieństwo przynależności próbki $\underline{x}$ do klasy $1$
-
-$$
-\underline{z} = [z_1, z_2, \ldots, z_n]^\top
-$$
+$p$ — prawdopodobieństwo przynależności próbki $\mathbf{x}$ do klasy $1$
 
 $$
-\underline{p} = [p_1, p_2, \ldots, p_n]^\top
+\mathbf{z} = [z_1, z_2, \ldots, z_n]^\top
 $$
 
-$\underline{z}$ — wektor logitów
+$$
+\mathbf{p} = [p_1, p_2, \ldots, p_n]^\top
+$$
 
-$\underline{p}$ — wektor prawdopodobieństw
+$\mathbf{z}$ — wektor logitów
 
-Niestety ponieważ sigmoid zdefiniowałem jako funkcję, która przyjmuje skalar oraz zwraca skalar, to będę musiał wyprowadzić metodę gradientu prostego na skalarach. Pochodną funkcji straty obliczam dla jednej próbki.
+$\mathbf{p}$ — wektor prawdopodobieństw
+
+Pochodną funkcji straty obliczam dla jednej próbki.
 
 ### Błąd kwadratowy
 
@@ -130,21 +130,21 @@ L = \frac{1}{2} (p - y)^2
 $$
 
 $$
-\frac{\partial L}{\partial \underline{w}} = \frac{\partial L}{\partial p} \frac{\partial p}{\partial \underline{w}}
+\frac{\partial L}{\partial \mathbf{w}} = \frac{\partial L}{\partial p} \frac{\partial p}{\partial \mathbf{w}}
 $$
 
-Pochodna $p$ po $\underline{w}$:
+Pochodna $p$ po $\mathbf{w}$:
 
 $$
-\frac{\partial p}{\partial \underline{w}} = \frac{\partial \sigma}{\partial z} \frac{\partial z}{\underline{w}}
-$$
-
-$$
-= \sigma(z)(1 - \sigma(z)) \frac{\partial}{\partial \underline{w}}(\underline{x} \underline{w})
+\frac{\partial p}{\partial \mathbf{w}} = \frac{\partial \sigma}{\partial z} \frac{\partial z}{\mathbf{w}}
 $$
 
 $$
-= p(1 - p) \underline{x} \\
+= \sigma(z)(1 - \sigma(z)) \frac{\partial}{\partial \mathbf{w}}(\mathbf{x} \mathbf{w})
+$$
+
+$$
+= p(1 - p) \mathbf{x} \\
 $$
 
 Pochodna $L$ po $p$:
@@ -157,26 +157,26 @@ $$
 \frac{\partial L}{\partial p} = p - y
 $$
 
-Pochodna $L$ po $\underline{w}$:
+Pochodna $L$ po $\mathbf{w}$:
 
 $$
-\frac{\partial L}{\partial \underline{w}} = \frac{\partial L}{\partial p} \frac{\partial p}{\partial \underline{w}}
+\frac{\partial L}{\partial \mathbf{w}} = \frac{\partial L}{\partial p} \frac{\partial p}{\partial \mathbf{w}}
 $$
 
 $$
-\frac{\partial L}{\partial \underline{w}} = (p - y) p (1 - p)\underline{x}
+\frac{\partial L}{\partial \mathbf{w}} = (p - y) p (1 - p)\mathbf{x}
 $$
 
 Metoda gradientu prostego:
 
 $$
-\Delta \underline{w} = - \eta \underline{x}^\top (p - y) p (1 - p)
+\Delta \mathbf{w} = - \eta \mathbf{x}^\top (p - y) p (1 - p)
 $$
 
 Postać macierzowa (dla całego zbioru próbek):
 
 $$
-\Delta \underline{w} = -\eta X^\top (\underline{p} - \underline{y})\underline{p}^\top(1 - \underline{p}) \\
+\Delta \mathbf{w} = -\eta X^\top (\mathbf{p} - \mathbf{y})\mathbf{p}^\top(1 - \mathbf{p}) \\
 \tiny{{(d, 1) = (d, n)(n, 1)(1, n)(n, 1)}}
 $$
 
@@ -187,13 +187,13 @@ L = -[y \ln(p) + (1 - y) \ln(1 - p)]
 $$
 
 $$
-\frac{\partial L}{\partial \underline{w}} = \frac{\partial L}{\partial p} \frac{\partial p}{\partial \underline{w}}
+\frac{\partial L}{\partial \mathbf{w}} = \frac{\partial L}{\partial p} \frac{\partial p}{\partial \mathbf{w}}
 $$
 
-Pochodna $p$ po $\underline{w}$:
+Pochodna $p$ po $\mathbf{w}$:
 
 $$
-\frac{\partial p}{\partial \underline{w}} = p(1 - p) \underline{x} \\
+\frac{\partial p}{\partial \mathbf{w}} = p(1 - p) \mathbf{x} \\
 $$
 
 Pochodna $L$ po $p$:
@@ -202,29 +202,29 @@ $$
 \frac{\partial L}{\partial p} = -\left[\frac{y}{p} + \frac{y - 1}{1 - p}\right]
 $$
 
-Pochodna $L$ po $\underline{w}$:
+Pochodna $L$ po $\mathbf{w}$:
 
 $$
-\frac{\partial L}{\partial \underline{w}} = -\left[\frac{y}{p} + \frac{y - 1}{1 - p}\right] p(1 - p) \underline{x}
-$$
-
-$$
-= -[y(1 - p)  + (y - 1) p] \underline{x}
+\frac{\partial L}{\partial \mathbf{w}} = -\left[\frac{y}{p} + \frac{y - 1}{1 - p}\right] p(1 - p) \mathbf{x}
 $$
 
 $$
-= (p - y) \underline{x}
+= -[y(1 - p)  + (y - 1) p] \mathbf{x}
+$$
+
+$$
+= (p - y) \mathbf{x}
 $$
 
 Metoda gradientu prostego:
 
 $$
-\Delta \underline{w} = -\eta \underline{x}^\top (p - y)
+\Delta \mathbf{w} = -\eta \mathbf{x}^\top (p - y)
 $$
 
 Postać macierzowa (dla całego zbioru próbek):
 
 $$
-\Delta \underline{w} = -\eta X^\top (\underline{p} - \underline{y}) \\
+\Delta \mathbf{w} = -\eta X^\top (\mathbf{p} - \mathbf{y}) \\
 \tiny{(d, 1) = (d, n)(n, 1)}
 $$

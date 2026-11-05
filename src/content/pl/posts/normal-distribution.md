@@ -3,7 +3,11 @@ title = 'Wyprowadzenie wzoru na rozkład normalny'
 date = 2026-05-11T22:08:41+02:00
 +++
 
+Rozkład normalny stanowi fundament klasycznej teorii prawdopodobieństwa oraz statystyki matematycznej. Jego kluczowa rola wynika bezpośrednio z centralnego twierdzenia granicznego, zgodnie z którym suma dużej liczby niezależnych zmiennych losowych o dowolnym rozkładzie zbiega do rozkładu normalnego.
+
 <!--more-->
+
+W tym artykule przedstawiam pełne wyprowadzenie wzoru na rozkład normalny od podstaw.
 
 ## Pochodne
 
@@ -65,11 +69,11 @@ $$
 \mathrm{Var}[X] = E[(X - \mu)^2]
 $$
 
-$X$ — zbiór próbek
+$X$ — zmienna losowa
 
 $E$ — funkcja, która zwraca wartość oczekiwaną
 
-$\mu$ — wartość oczekiwana dla zbioru próbek $X$
+$\mu$ — wartość oczekiwana dla $X$
 
 Jeżeli wartością oczekiwaną jest średnia arytmetyczna, to wtedy wariancja to błąd kwadratowy średniokwadratowy (MSE) dla średniej.
 
@@ -113,7 +117,7 @@ Takie są założenia:
 2. Rozkład prawdopodobieństwa jest symetryczny.
 3. Im bardziej skrajne wartości tym mniejsze prawdopodobieństwo.
 
-Wyobraźmy sobie, że losowo dobieramy punkty na płaszczyźnie $xy$ i rysujemy wektory łączące środek układu współrzędnych z tymi punktami. Nasza funkcja rozkładu prawdopodobieństwa $p(r)$ niech zwraca prawdopodobieństwo dobrania wektora o długości $r$.
+Wyobraźmy sobie, że losowo dobieramy punkty na płaszczyźnie $xy$ i rysujemy wektory łączące środek układu współrzędnych z tymi punktami. Niech funkcja $p(r)$ oznacza gęstość prawdopodobieństwa wylosowania wektora o długości $r$.
 
 $$
 r = \sqrt{x^2 + y^2}
@@ -129,7 +133,7 @@ $$
 y = r \sin \theta
 $$
 
-Trzeba zauważyć, że prawdopodobieństwo dobrania wektora o długości $r$ jest proporcjonalne do dobrania wektora o długości $x$, a potem wektora o długości $y$ (ponieważ rozkład jest symetryczny, można dowolnie obrócić wektor). Potem już idą rachunki.
+Warto zauważyć, że przy założeniu symetrii obrotowej oraz statystycznej niezależności składowych, dwuwymiarowa gęstość prawdopodobieństwa wylosowania wektora $(x, y)$ jest proporcjonalna do iloczynu gęstości prawdopodobieństwa na osiach układu: $f(x, y) \propto f(x, 0) \cdot f(0, y)$.
 
 $$
 p(r) \propto p(x) p(y)
